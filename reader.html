@@ -5,13 +5,9 @@
 
   <meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>DEJAVU — Dergi</title>
-
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -22,42 +18,25 @@
     rel="stylesheet"
   >
 
-
   <style>
 
     :root {
-
       --bg: #f2e6e1;
-
       --panel: #fffaf7;
-
       --wine: #482634;
-
       --pink: #d96f88;
-
       --soft-pink: #eaa2b1;
-
       --line: rgba(72,38,52,.12);
-
     }
-
 
     * {
-
       box-sizing: border-box;
-
       margin: 0;
-
       padding: 0;
-
     }
 
-
     body {
-
-      font-family:
-        "DM Sans",
-        sans-serif;
+      font-family: "DM Sans", sans-serif;
 
       background:
         radial-gradient(
@@ -74,17 +53,17 @@
 
         var(--bg);
 
-      color:
-        var(--wine);
+      color: var(--wine);
 
       min-height: 100vh;
 
       overflow-x: hidden;
-
     }
 
 
-    /* ÜST BAR */
+    /* =========================
+       ÜST BAR
+    ========================= */
 
     .reader-header {
 
@@ -96,8 +75,7 @@
 
       height: 72px;
 
-      padding:
-        0 25px;
+      padding: 0 25px;
 
       display: flex;
 
@@ -105,14 +83,11 @@
 
       justify-content: space-between;
 
-      background:
-        rgba(255,250,247,.88);
+      background: rgba(255,250,247,.88);
 
-      backdrop-filter:
-        blur(20px);
+      backdrop-filter: blur(20px);
 
-      border-bottom:
-        1px solid var(--line);
+      border-bottom: 1px solid var(--line);
 
     }
 
@@ -145,12 +120,9 @@
 
       padding-left: 18px;
 
-      border-left:
-        1px solid var(--line);
+      border-left: 1px solid var(--line);
 
-      font-family:
-        "Cormorant Garamond",
-        serif;
+      font-family: "Cormorant Garamond", serif;
 
       font-size: 20px;
 
@@ -170,9 +142,7 @@
 
     button {
 
-      font-family:
-        "DM Sans",
-        sans-serif;
+      font-family: "DM Sans", sans-serif;
 
       cursor: pointer;
 
@@ -181,17 +151,13 @@
 
     .tool-button {
 
-      border:
-        1px solid var(--line);
+      border: 1px solid var(--line);
 
-      background:
-        rgba(255,255,255,.65);
+      background: rgba(255,255,255,.65);
 
-      color:
-        var(--wine);
+      color: var(--wine);
 
-      padding:
-        9px 13px;
+      padding: 9px 13px;
 
       border-radius: 100px;
 
@@ -204,26 +170,25 @@
 
     .tool-button:hover {
 
-      background:
-        var(--soft-pink);
+      background: var(--soft-pink);
 
     }
 
 
     .tool-button.active {
 
-      background:
-        var(--wine);
+      background: var(--wine);
 
       color: white;
 
-      border-color:
-        var(--wine);
+      border-color: var(--wine);
 
     }
 
 
-    /* SAYFA NAVİGASYONU */
+    /* =========================
+       NAVİGASYON
+    ========================= */
 
     .page-navigation {
 
@@ -237,11 +202,9 @@
 
       gap: 20px;
 
-      background:
-        rgba(255,250,247,.60);
+      background: rgba(255,250,247,.60);
 
-      border-bottom:
-        1px solid var(--line);
+      border-bottom: 1px solid var(--line);
 
     }
 
@@ -254,14 +217,11 @@
 
       border-radius: 50%;
 
-      border:
-        1px solid var(--line);
+      border: 1px solid var(--line);
 
-      background:
-        white;
+      background: white;
 
-      color:
-        var(--wine);
+      color: var(--wine);
 
       font-size: 18px;
 
@@ -272,8 +232,7 @@
 
     .arrow:hover {
 
-      background:
-        var(--wine);
+      background: var(--wine);
 
       color: white;
 
@@ -282,7 +241,7 @@
 
     #pageCounter {
 
-      min-width: 90px;
+      min-width: 110px;
 
       text-align: center;
 
@@ -293,22 +252,24 @@
     }
 
 
-    /* OKUMA ALANI */
+    /* =========================
+       OKUMA ALANI
+    ========================= */
 
     #viewer {
 
       width: 100%;
 
-      min-height:
-        calc(100vh - 137px);
+      min-height: calc(100vh - 137px);
 
-      padding:
-        45px 25px 100px;
+      padding: 45px 25px 100px;
 
     }
 
 
-    /* YAN YANA */
+    /* =========================
+       YAN YANA
+    ========================= */
 
     #viewer.spread {
 
@@ -325,13 +286,12 @@
 
     #viewer.spread .page {
 
-      width:
-        min(44vw, 650px);
+      width: min(44vw, 650px);
 
     }
 
 
-    /* KAPAK */
+    /* KAPAK TEK */
 
     #viewer.spread.cover {
 
@@ -339,18 +299,21 @@
 
       justify-content: center;
 
+      align-items: flex-start;
+
     }
 
 
     #viewer.spread.cover .page {
 
-      width:
-        min(65vw, 650px);
+      width: min(65vw, 650px);
 
     }
 
 
-    /* ŞERİT */
+    /* =========================
+       ŞERİT
+    ========================= */
 
     #viewer.strip {
 
@@ -367,24 +330,24 @@
 
     #viewer.strip .page {
 
-      width:
-        min(850px, 95vw);
+      width: min(850px, 95vw);
+
+      display: block !important;
 
     }
 
+
+    /* =========================
+       SAYFA
+    ========================= */
 
     .page {
 
       position: relative;
 
-      background:
-        white;
+      background: white;
 
-      box-shadow:
-        0 20px 50px rgba(72,38,52,.13);
-
-      transition:
-        transform .25s;
+      box-shadow: 0 20px 50px rgba(72,38,52,.13);
 
     }
 
@@ -400,7 +363,9 @@
     }
 
 
-    /* YÜKLENİYOR */
+    /* =========================
+       LOADING
+    ========================= */
 
     #loading {
 
@@ -420,25 +385,20 @@
 
       gap: 20px;
 
-      background:
-        #f2e6e1;
+      background: #f2e6e1;
 
-      transition:
-        opacity .4s;
+      transition: opacity .4s;
 
     }
 
 
     .loading-logo {
 
-      font-family:
-        "Cormorant Garamond",
-        serif;
+      font-family: "Cormorant Garamond", serif;
 
       font-size: 48px;
 
-      color:
-        var(--wine);
+      color: var(--wine);
 
       font-style: italic;
 
@@ -451,16 +411,13 @@
 
       height: 45px;
 
-      border:
-        2px solid rgba(72,38,52,.12);
+      border: 2px solid rgba(72,38,52,.12);
 
-      border-top-color:
-        var(--pink);
+      border-top-color: var(--pink);
 
       border-radius: 50%;
 
-      animation:
-        spin .8s linear infinite;
+      animation: spin .8s linear infinite;
 
     }
 
@@ -474,14 +431,15 @@
     }
 
 
-    /* MOBİL */
+    /* =========================
+       MOBİL
+    ========================= */
 
     @media(max-width: 700px) {
 
       .reader-header {
 
-        padding:
-          0 12px;
+        padding: 0 12px;
 
         height: 64px;
 
@@ -513,8 +471,7 @@
 
       .tool-button {
 
-        padding:
-          8px 9px;
+        padding: 8px 9px;
 
         font-size: 9px;
 
@@ -537,13 +494,12 @@
 
       #viewer {
 
-        padding:
-          20px 8px 70px;
+        padding: 20px 8px 70px;
 
       }
 
 
-      /* TELEFONDA YAN YANA */
+      /* MOBİL YAN YANA */
 
       #viewer.spread {
 
@@ -564,8 +520,6 @@
 
         width: calc(50% - 2px);
 
-        max-width: none;
-
         margin: 0;
 
       }
@@ -578,7 +532,7 @@
       }
 
 
-      /* TELEFONDA KAPAK */
+      /* MOBİL KAPAK */
 
       #viewer.spread.cover .page {
 
@@ -591,13 +545,35 @@
       }
 
 
+      /* MOBİL ŞERİT */
+
+      #viewer.strip {
+
+        display: flex !important;
+
+        flex-direction: column !important;
+
+        align-items: center !important;
+
+        gap: 20px !important;
+
+      }
+
+
       #viewer.strip .page {
 
-        width: 100%;
+        display: block !important;
+
+        width: 100% !important;
+
+        max-width: 850px;
+
+        margin: 0 auto;
 
       }
 
     }
+
 
   </style>
 
@@ -607,7 +583,9 @@
 <body>
 
 
-  <!-- YÜKLENİYOR -->
+  <!-- =========================
+       LOADING
+  ========================= -->
 
   <div id="loading">
 
@@ -628,7 +606,9 @@
   </div>
 
 
-  <!-- HEADER -->
+  <!-- =========================
+       HEADER
+  ========================= -->
 
   <header class="reader-header">
 
@@ -702,7 +682,9 @@
   </header>
 
 
-  <!-- SAYFA NAVİGASYONU -->
+  <!-- =========================
+       NAVİGASYON
+  ========================= -->
 
   <div class="page-navigation">
 
@@ -716,7 +698,7 @@
 
 
     <div id="pageCounter">
-      1 / ...
+      Kapak / ...
     </div>
 
 
@@ -731,7 +713,9 @@
   </div>
 
 
-  <!-- PDF -->
+  <!-- =========================
+       PDF VIEWER
+  ========================= -->
 
   <main
     id="viewer"
@@ -746,6 +730,10 @@
 
   <script>
 
+
+    /* =========================
+       PDF KONUMU
+    ========================= */
 
     const params =
       new URLSearchParams(
@@ -781,9 +769,9 @@
       document.getElementById("pageCounter");
 
 
-    /*
-      PDF'Yİ YÜKLE
-    */
+    /* =========================
+       PDF YÜKLE
+    ========================= */
 
     async function loadPDF() {
 
@@ -804,7 +792,6 @@
 
         updateVisiblePages();
 
-
         updateCounter();
 
 
@@ -822,7 +809,9 @@
         }, 400);
 
 
-      } catch(error) {
+      }
+
+      catch(error) {
 
         console.error(error);
 
@@ -856,6 +845,7 @@
               </div>
 
             </div>
+
           `;
 
       }
@@ -863,9 +853,9 @@
     }
 
 
-    /*
-      TÜM SAYFALARI OLUŞTUR
-    */
+    /* =========================
+       TÜM SAYFALARI OLUŞTUR
+    ========================= */
 
     async function renderAllPages() {
 
@@ -895,7 +885,8 @@
 
 
         /*
-          PDF SAYFA NUMARASI EKLENMİYOR
+          BURADA EKSTRA SAYFA
+          NUMARASI YOK.
         */
 
         pageBox.appendChild(canvas);
@@ -910,16 +901,13 @@
 
       }
 
-
-      updateVisiblePages();
-
     }
 
 
-    /*
-      TEK SAYFAYI RENDER ET
-      ESKİ KALİTE MANTIĞI KORUNDU
-    */
+    /* =========================
+       TEK SAYFA RENDER
+       ESKİ KALİTE
+    ========================= */
 
     async function renderPage(
       pageNumber,
@@ -1021,15 +1009,9 @@
     }
 
 
-    /*
-      GÖRÜNEN SAYFALAR
-
-      1       = KAPAK
-      2 | 3   = İLK SPREAD
-      4 | 5
-      6 | 7
-      ...
-    */
+    /* =========================
+       GÖRÜNEN SAYFALAR
+    ========================= */
 
     function updateVisiblePages() {
 
@@ -1038,6 +1020,10 @@
           ".page"
         );
 
+
+      /*
+        ÖNCE HEPSİNİ GİZLE
+      */
 
       pages.forEach(page => {
 
@@ -1053,6 +1039,9 @@
 
       /*
         ŞERİT MODU
+
+        BURADA HİÇBİR SAYFAYI
+        GİZLEMİYORUZ.
       */
 
       if (mode === "strip") {
@@ -1081,7 +1070,7 @@
 
       /*
         KAPAK
-      */
+    */
 
       if (currentPage === 1) {
 
@@ -1115,6 +1104,11 @@
 
       /*
         İÇ SAYFALAR
+
+        2 | 3
+        4 | 5
+        6 | 7
+        ...
       */
 
       viewer.classList.remove(
@@ -1160,11 +1154,30 @@
     }
 
 
-    /*
-      ÖNCEKİ SAYFA
-    */
+    /* =========================
+       ÖNCEKİ SAYFA
+    ========================= */
 
     function previousPage() {
+
+      if (mode === "strip") {
+
+        if (currentPage > 1) {
+
+          currentPage--;
+
+        }
+
+        updateCounter();
+
+        scrollToPage(
+          currentPage
+        );
+
+        return;
+
+      }
+
 
       if (currentPage <= 1) {
 
@@ -1173,29 +1186,15 @@
       }
 
 
-      if (mode === "spread") {
+      if (currentPage === 2) {
 
-        /*
-          2 → 1
-          4 → 2
-          6 → 4
-        */
-
-        if (currentPage === 2) {
-
-          currentPage = 1;
-
-        } else {
-
-          currentPage -= 2;
-
-        }
+        currentPage = 1;
 
       }
 
       else {
 
-        currentPage--;
+        currentPage -= 2;
 
       }
 
@@ -1204,23 +1203,35 @@
 
       updateCounter();
 
+    }
+
+
+    /* =========================
+       SONRAKİ SAYFA
+    ========================= */
+
+    function nextPage() {
 
       if (mode === "strip") {
+
+        if (
+          currentPage < totalPages
+        ) {
+
+          currentPage++;
+
+        }
+
+        updateCounter();
 
         scrollToPage(
           currentPage
         );
 
+        return;
+
       }
 
-    }
-
-
-    /*
-      SONRAKİ SAYFA
-    */
-
-    function nextPage() {
 
       if (
         currentPage >= totalPages
@@ -1231,40 +1242,34 @@
       }
 
 
-      if (mode === "spread") {
+      /*
+        KAPAK → 2|3
+      */
 
-        /*
-          1 → 2
-          2 → 4
-          4 → 6
-          6 → 8
-        */
+      if (currentPage === 1) {
 
-        if (currentPage === 1) {
-
-          currentPage = 2;
-
-        } else {
-
-          currentPage += 2;
-
-        }
-
-
-        if (
-          currentPage > totalPages
-        ) {
-
-          currentPage =
-            totalPages;
-
-        }
+        currentPage = 2;
 
       }
 
+      /*
+        2|3 → 4|5
+        4|5 → 6|7
+      */
+
       else {
 
-        currentPage++;
+        currentPage += 2;
+
+      }
+
+
+      if (
+        currentPage > totalPages
+      ) {
+
+        currentPage =
+          totalPages;
 
       }
 
@@ -1273,28 +1278,19 @@
 
       updateCounter();
 
-
-      if (mode === "strip") {
-
-        scrollToPage(
-          currentPage
-        );
-
-      }
-
     }
 
 
-    /*
-      SAYFA NUMARASI
-    */
+    /* =========================
+       COUNTER
+    ========================= */
 
     function updateCounter() {
 
       if (!totalPages) {
 
         counter.textContent =
-          "1 / ...";
+          "Kapak / ...";
 
         return;
 
@@ -1334,9 +1330,9 @@
     }
 
 
-    /*
-      ŞERİT MODUNDA SAYFAYA GİT
-    */
+    /* =========================
+       ŞERİTTE SAYFAYA GİT
+    ========================= */
 
     function scrollToPage(
       pageNumber
@@ -1363,9 +1359,50 @@
     }
 
 
-    /*
-      YAKINLAŞTIR
-    */
+    /* =========================
+       MOD DEĞİŞTİR
+    ========================= */
+
+    function setMode(newMode) {
+
+      mode =
+        newMode;
+
+
+      viewer.className =
+        newMode;
+
+
+      document
+        .getElementById("spreadButton")
+        .classList
+        .toggle(
+          "active",
+          newMode === "spread"
+        );
+
+
+      document
+        .getElementById("stripButton")
+        .classList
+        .toggle(
+          "active",
+          newMode === "strip"
+        );
+
+
+      updateVisiblePages();
+
+      updateCounter();
+
+      rerender();
+
+    }
+
+
+    /* =========================
+       ZOOM IN
+    ========================= */
 
     function zoomIn() {
 
@@ -1381,9 +1418,9 @@
     }
 
 
-    /*
-      UZAKLAŞTIR
-    */
+    /* =========================
+       ZOOM OUT
+    ========================= */
 
     function zoomOut() {
 
@@ -1399,9 +1436,9 @@
     }
 
 
-    /*
-      YENİDEN RENDER
-    */
+    /* =========================
+       YENİDEN RENDER
+    ========================= */
 
     async function rerender() {
 
@@ -1437,9 +1474,9 @@
     }
 
 
-    /*
-      TAM EKRAN
-    */
+    /* =========================
+       TAM EKRAN
+    ========================= */
 
     function fullScreen() {
 
@@ -1461,12 +1498,9 @@
     }
 
 
-    /*
-      KLAVYE
-
-      ← önceki
-      → sonraki
-    */
+    /* =========================
+       KLAVYE
+    ========================= */
 
     document.addEventListener(
       "keydown",
@@ -1493,9 +1527,9 @@
     );
 
 
-    /*
-      TELEFON DÖNÜNCE
-    */
+    /* =========================
+       EKRAN BOYUTU
+    ========================= */
 
     window.addEventListener(
       "resize",
@@ -1507,9 +1541,9 @@
     );
 
 
-    /*
-      BAŞLAT
-    */
+    /* =========================
+       BAŞLAT
+    ========================= */
 
     loadPDF();
 
