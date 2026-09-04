@@ -3,1154 +3,1518 @@
 
 <head>
 
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>DEJAVU — Dergi</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-
-<style>
-
-:root {
-  --bg: #f2e6e1;
-  --panel: #fffaf7;
-  --wine: #482634;
-  --pink: #d96f88;
-  --soft-pink: #eaa2b1;
-  --line: rgba(72,38,52,.12);
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: "DM Sans", sans-serif;
-  background:
-    radial-gradient(
-      circle at 10% 20%,
-      rgba(234,162,177,.30),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 90% 80%,
-      rgba(185,165,216,.28),
-      transparent 30%
-    ),
-    var(--bg);
-  color: var(--wine);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-/* HEADER */
-
-.reader-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  height: 72px;
-  padding: 0 25px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(255,250,247,.88);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--line);
-}
-
-.reader-brand {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.reader-logo {
-  width: 95px;
-  max-height: 45px;
-  object-fit: contain;
-  mix-blend-mode: multiply;
-}
-
-.issue-name {
-  padding-left: 18px;
-  border-left: 1px solid var(--line);
-  font-family: "Cormorant Garamond", serif;
-  font-size: 20px;
-}
-
-.reader-tools {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-button {
-  font-family: "DM Sans", sans-serif;
-  cursor: pointer;
-}
-
-.tool-button {
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,.65);
-  color: var(--wine);
-  padding: 9px 13px;
-  border-radius: 100px;
-  font-size: 11px;
-  transition: .25s;
-}
-
-.tool-button:hover {
-  background: var(--soft-pink);
-}
-
-.tool-button.active {
-  background: var(--wine);
-  color: white;
-  border-color: var(--wine);
-}
-
-/* NAVIGATION */
-
-.page-navigation {
-  height: 65px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  background: rgba(255,250,247,.60);
-  border-bottom: 1px solid var(--line);
-}
-
-.arrow {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid var(--line);
-  background: white;
-  color: var(--wine);
-  font-size: 18px;
-  transition: .25s;
-}
-
-.arrow:hover {
-  background: var(--wine);
-  color: white;
-}
-
-#pageCounter {
-  min-width: 110px;
-  text-align: center;
-  font-size: 12px;
-  letter-spacing: .08em;
-}
-
-/* VIEWER */
-
-#viewer {
-  width: 100%;
-  min-height: calc(100vh - 137px);
-  padding: 45px 25px 100px;
-}
-
-/* SPREAD */
-
-#viewer.spread {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 0;
-}
-
-#viewer.spread .page {
-  width: min(45vw, 680px);
-}
-
-/* KAPAK TEK */
-
-#viewer.spread.cover-mode .page {
-  width: min(70vw, 700px);
-}
-
-/* STRIP */
-
-#viewer.strip {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 35px;
-}
-
-#viewer.strip .page {
-  width: min(900px, 95vw);
-}
-
-/* PAGE */
-
-.page {
-  position: relative;
-  background: white;
-  box-shadow: 0 20px 50px rgba(72,38,52,.13);
-  overflow: hidden;
-}
-
-.page canvas {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* YÜKLENİYOR */
-
-#loading {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 20px;
-  background: #f2e6e1;
-  transition: opacity .4s;
-}
-
-.loading-logo {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 48px;
-  color: var(--wine);
-  font-style: italic;
-}
-
-.loader {
-  width: 45px;
-  height: 45px;
-  border: 2px solid rgba(72,38,52,.12);
-  border-top-color: var(--pink);
-  border-radius: 50%;
-  animation: spin .8s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* MOBİL */
-
-@media(max-width:700px) {
-
-  .reader-header {
-    padding: 0 12px;
-    height: 64px;
-  }
-
-  .reader-logo {
-    width: 75px;
-  }
-
-  .issue-name {
-    font-size: 16px;
-    padding-left: 10px;
-  }
-
-  .reader-tools {
-    gap: 4px;
-  }
-
-  .tool-button {
-    padding: 8px 9px;
-    font-size: 9px;
-  }
-
-  .tool-button.zoom {
-    display: none;
-  }
-
-  .page-navigation {
-    height: 58px;
-  }
-
-  #viewer {
-    padding: 20px 6px 70px;
-  }
-
-  /* TELEFONDA YAN YANA */
-
-  #viewer.spread {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 0;
-  }
-
-  #viewer.spread .page {
-    width: 50%;
-    max-width: none;
-  }
-
-  /* KAPAK */
-
-  #viewer.spread.cover-mode .page {
-    width: 92%;
-  }
-
-  /* ŞERİT */
-
-  #viewer.strip {
-    gap: 20px;
-  }
-
-  #viewer.strip .page {
-    width: 100%;
-  }
-
-}
-
-/* ÇOK KÜÇÜK TELEFON */
-
-@media(max-width:400px) {
-
-  #viewer.spread .page {
-    width: 50%;
-  }
-
-}
-
-</style>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>DEJAVU — Dergi</title>
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <style>
+
+    :root {
+
+      --bg: #f2e6e1;
+
+      --panel: #fffaf7;
+
+      --wine: #482634;
+
+      --pink: #d96f88;
+
+      --soft-pink: #eaa2b1;
+
+      --line: rgba(72,38,52,.12);
+
+    }
+
+
+    * {
+
+      box-sizing: border-box;
+
+      margin: 0;
+
+      padding: 0;
+
+    }
+
+
+    body {
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      background:
+        radial-gradient(
+          circle at 10% 20%,
+          rgba(234,162,177,.30),
+          transparent 30%
+        ),
+
+        radial-gradient(
+          circle at 90% 80%,
+          rgba(185,165,216,.28),
+          transparent 30%
+        ),
+
+        var(--bg);
+
+      color:
+        var(--wine);
+
+      min-height: 100vh;
+
+      overflow-x: hidden;
+
+    }
+
+
+    /* ÜST BAR */
+
+    .reader-header {
+
+      position: sticky;
+
+      top: 0;
+
+      z-index: 100;
+
+      height: 72px;
+
+      padding:
+        0 25px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      background:
+        rgba(255,250,247,.88);
+
+      backdrop-filter:
+        blur(20px);
+
+      border-bottom:
+        1px solid var(--line);
+
+    }
+
+
+    .reader-brand {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 18px;
+
+    }
+
+
+    .reader-logo {
+
+      width: 95px;
+
+      max-height: 45px;
+
+      object-fit: contain;
+
+      mix-blend-mode: multiply;
+
+    }
+
+
+    .issue-name {
+
+      padding-left: 18px;
+
+      border-left:
+        1px solid var(--line);
+
+      font-family:
+        "Cormorant Garamond",
+        serif;
+
+      font-size: 20px;
+
+    }
+
+
+    .reader-tools {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+    }
+
+
+    button {
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      cursor: pointer;
+
+    }
+
+
+    .tool-button {
+
+      border:
+        1px solid var(--line);
+
+      background:
+        rgba(255,255,255,.65);
+
+      color:
+        var(--wine);
+
+      padding:
+        9px 13px;
+
+      border-radius: 100px;
+
+      font-size: 11px;
+
+      transition: .25s;
+
+    }
+
+
+    .tool-button:hover {
+
+      background:
+        var(--soft-pink);
+
+    }
+
+
+    .tool-button.active {
+
+      background:
+        var(--wine);
+
+      color: white;
+
+      border-color:
+        var(--wine);
+
+    }
+
+
+    /* SAYFA NAVİGASYONU */
+
+    .page-navigation {
+
+      height: 65px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 20px;
+
+      background:
+        rgba(255,250,247,.60);
+
+      border-bottom:
+        1px solid var(--line);
+
+    }
+
+
+    .arrow {
+
+      width: 40px;
+
+      height: 40px;
+
+      border-radius: 50%;
+
+      border:
+        1px solid var(--line);
+
+      background:
+        white;
+
+      color:
+        var(--wine);
+
+      font-size: 18px;
+
+      transition: .25s;
+
+    }
+
+
+    .arrow:hover {
+
+      background:
+        var(--wine);
+
+      color: white;
+
+    }
+
+
+    #pageCounter {
+
+      min-width: 90px;
+
+      text-align: center;
+
+      font-size: 12px;
+
+      letter-spacing: .08em;
+
+    }
+
+
+    /* OKUMA ALANI */
+
+    #viewer {
+
+      width: 100%;
+
+      min-height:
+        calc(100vh - 137px);
+
+      padding:
+        45px 25px 100px;
+
+    }
+
+
+    /* YAN YANA */
+
+    #viewer.spread {
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: flex-start;
+
+      gap: 12px;
+
+    }
+
+
+    #viewer.spread .page {
+
+      width:
+        min(44vw, 650px);
+
+    }
+
+
+    /* KAPAK */
+
+    #viewer.spread.cover {
+
+      display: flex;
+
+      justify-content: center;
+
+    }
+
+
+    #viewer.spread.cover .page {
+
+      width:
+        min(65vw, 650px);
+
+    }
+
+
+    /* ŞERİT */
+
+    #viewer.strip {
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      gap: 25px;
+
+    }
+
+
+    #viewer.strip .page {
+
+      width:
+        min(850px, 95vw);
+
+    }
+
+
+    .page {
+
+      position: relative;
+
+      background:
+        white;
+
+      box-shadow:
+        0 20px 50px rgba(72,38,52,.13);
+
+      transition:
+        transform .25s;
+
+    }
+
+
+    .page canvas {
+
+      display: block;
+
+      width: 100%;
+
+      height: auto;
+
+    }
+
+
+    /* YÜKLENİYOR */
+
+    #loading {
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 200;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      flex-direction: column;
+
+      gap: 20px;
+
+      background:
+        #f2e6e1;
+
+      transition:
+        opacity .4s;
+
+    }
+
+
+    .loading-logo {
+
+      font-family:
+        "Cormorant Garamond",
+        serif;
+
+      font-size: 48px;
+
+      color:
+        var(--wine);
+
+      font-style: italic;
+
+    }
+
+
+    .loader {
+
+      width: 45px;
+
+      height: 45px;
+
+      border:
+        2px solid rgba(72,38,52,.12);
+
+      border-top-color:
+        var(--pink);
+
+      border-radius: 50%;
+
+      animation:
+        spin .8s linear infinite;
+
+    }
+
+
+    @keyframes spin {
+
+      to {
+        transform: rotate(360deg);
+      }
+
+    }
+
+
+    /* MOBİL */
+
+    @media(max-width: 700px) {
+
+      .reader-header {
+
+        padding:
+          0 12px;
+
+        height: 64px;
+
+      }
+
+
+      .reader-logo {
+
+        width: 75px;
+
+      }
+
+
+      .issue-name {
+
+        font-size: 16px;
+
+        padding-left: 10px;
+
+      }
+
+
+      .reader-tools {
+
+        gap: 4px;
+
+      }
+
+
+      .tool-button {
+
+        padding:
+          8px 9px;
+
+        font-size: 9px;
+
+      }
+
+
+      .tool-button.zoom {
+
+        display: none;
+
+      }
+
+
+      .page-navigation {
+
+        height: 58px;
+
+      }
+
+
+      #viewer {
+
+        padding:
+          20px 8px 70px;
+
+      }
+
+
+      /* TELEFONDA YAN YANA */
+
+      #viewer.spread {
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: flex-start;
+
+        gap: 4px;
+
+      }
+
+
+      #viewer.spread .page {
+
+        display: none;
+
+        width: calc(50% - 2px);
+
+        max-width: none;
+
+        margin: 0;
+
+      }
+
+
+      #viewer.spread .page.visible {
+
+        display: block;
+
+      }
+
+
+      /* TELEFONDA KAPAK */
+
+      #viewer.spread.cover .page {
+
+        width: 100%;
+
+        max-width: 650px;
+
+        margin: 0 auto;
+
+      }
+
+
+      #viewer.strip .page {
+
+        width: 100%;
+
+      }
+
+    }
+
+  </style>
 
 </head>
 
+
 <body>
 
-<!-- LOADING -->
 
-<div id="loading">
+  <!-- YÜKLENİYOR -->
 
-  <div class="loading-logo">
-    DEJAVU
-  </div>
+  <div id="loading">
 
-  <div class="loader"></div>
+    <div class="loading-logo">
+      DEJAVU
+    </div>
 
-  <div style="
-    font-size:11px;
-    letter-spacing:.12em;
-    color:#765d67;
-  ">
-    DERGİ HAZIRLANIYOR
-  </div>
+    <div class="loader"></div>
 
-</div>
-
-
-<!-- HEADER -->
-
-<header class="reader-header">
-
-  <div class="reader-brand">
-
-    <a href="index.html">
-
-      <img
-        src="logo.jpg"
-        class="reader-logo"
-        alt="DEJAVU"
-      >
-
-    </a>
-
-    <div class="issue-name">
-      01 EYLÜL
+    <div style="
+      font-size:11px;
+      letter-spacing:.12em;
+      color:#765d67;
+    ">
+      DERGİ HAZIRLANIYOR
     </div>
 
   </div>
 
 
-  <div class="reader-tools">
+  <!-- HEADER -->
+
+  <header class="reader-header">
+
+    <div class="reader-brand">
+
+      <a href="index.html">
+
+        <img
+          src="logo.jpg"
+          class="reader-logo"
+          alt="DEJAVU"
+        >
+
+      </a>
+
+
+      <div class="issue-name">
+        01 EYLÜL
+      </div>
+
+    </div>
+
+
+    <div class="reader-tools">
+
+
+      <button
+        class="tool-button active"
+        id="spreadButton"
+        onclick="setMode('spread')"
+      >
+        YAN YANA
+      </button>
+
+
+      <button
+        class="tool-button"
+        id="stripButton"
+        onclick="setMode('strip')"
+      >
+        ŞERİT
+      </button>
+
+
+      <button
+        class="tool-button zoom"
+        onclick="zoomOut()"
+      >
+        −
+      </button>
+
+
+      <button
+        class="tool-button zoom"
+        onclick="zoomIn()"
+      >
+        +
+      </button>
+
+
+      <button
+        class="tool-button"
+        onclick="fullScreen()"
+      >
+        ⛶
+      </button>
+
+
+    </div>
+
+  </header>
+
+
+  <!-- SAYFA NAVİGASYONU -->
+
+  <div class="page-navigation">
 
     <button
-      class="tool-button active"
-      id="spreadButton"
-      onclick="setMode('spread')"
+      class="arrow"
+      onclick="previousPage()"
+      aria-label="Önceki sayfa"
     >
-      YAN YANA
+      ←
     </button>
 
-    <button
-      class="tool-button"
-      id="stripButton"
-      onclick="setMode('strip')"
-    >
-      ŞERİT
-    </button>
+
+    <div id="pageCounter">
+      1 / ...
+    </div>
+
 
     <button
-      class="tool-button zoom"
-      onclick="zoomOut()"
+      class="arrow"
+      onclick="nextPage()"
+      aria-label="Sonraki sayfa"
     >
-      −
-    </button>
-
-    <button
-      class="tool-button zoom"
-      onclick="zoomIn()"
-    >
-      +
-    </button>
-
-    <button
-      class="tool-button"
-      onclick="fullScreen()"
-    >
-      ⛶
+      →
     </button>
 
   </div>
 
-</header>
+
+  <!-- PDF -->
+
+  <main
+    id="viewer"
+    class="spread"
+  ></main>
 
 
-<!-- NAVIGATION -->
+  <!-- PDF.JS -->
 
-<div class="page-navigation">
-
-  <button
-    class="arrow"
-    onclick="previousPage()"
-  >
-    ←
-  </button>
-
-  <div id="pageCounter">
-    1 / ...
-  </div>
-
-  <button
-    class="arrow"
-    onclick="nextPage()"
-  >
-    →
-  </button>
-
-</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 
-<!-- PDF -->
-
-<main
-  id="viewer"
-  class="spread"
-></main>
+  <script>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-
-<script>
-
-const params =
-  new URLSearchParams(
-    window.location.search
-  );
-
-const pdfUrl =
-  params.get("pdf")
-  || "dergi/01-eylul.pdf";
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
 
 
-pdfjsLib.GlobalWorkerOptions.workerSrc =
-  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+    const pdfUrl =
+      params.get("pdf")
+      || "dergi/01-eylul.pdf";
 
 
-let pdf = null;
-
-let currentPage = 1;
-
-let totalPages = 0;
-
-let mode = "spread";
-
-let zoom = 1;
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
 
-const viewer =
-  document.getElementById("viewer");
+    let pdf = null;
 
-const counter =
-  document.getElementById("pageCounter");
+    let currentPage = 1;
 
+    let totalPages = 0;
 
-/* PDF YÜKLE */
+    let mode = "spread";
 
-async function loadPDF() {
-
-  try {
-
-    pdf =
-      await pdfjsLib
-        .getDocument(pdfUrl)
-        .promise;
-
-    totalPages =
-      pdf.numPages;
-
-    await renderAllPages();
-
-    updateVisiblePages();
-
-    updateCounter();
-
-    document
-      .getElementById("loading")
-      .style.opacity = "0";
-
-    setTimeout(() => {
-
-      document
-        .getElementById("loading")
-        .style.display = "none";
-
-    }, 400);
-
-  }
-
-  catch(error) {
-
-    console.error(error);
-
-    document
-      .getElementById("loading")
-      .innerHTML = `
-
-        <div style="
-          text-align:center;
-          padding:30px;
-        ">
-
-          <div style="
-            font-family:'Cormorant Garamond';
-            font-size:40px;
-            margin-bottom:15px;
-          ">
-            Bir sorun oluştu.
-          </div>
-
-          <div style="
-            font-size:13px;
-            color:#765d67;
-          ">
-            Dergi dosyası bulunamadı.
-            <br><br>
-            PDF dosyasının
-            <b>dergi/01-eylul.pdf</b>
-            konumunda olduğundan emin ol.
-          </div>
-
-        </div>
-      `;
-
-  }
-
-}
+    let zoom = 1;
 
 
-/* SAYFALARI OLUŞTUR */
+    const viewer =
+      document.getElementById("viewer");
 
-async function renderAllPages() {
 
-  viewer.innerHTML = "";
+    const counter =
+      document.getElementById("pageCounter");
 
-  for (
-    let i = 1;
-    i <= totalPages;
-    i++
-  ) {
 
-    const pageBox =
-      document.createElement("div");
+    /*
+      PDF'Yİ YÜKLE
+    */
 
-    pageBox.className = "page";
+    async function loadPDF() {
 
-    pageBox.dataset.page = i;
+      try {
 
-    const canvas =
-      document.createElement("canvas");
+        pdf =
+          await pdfjsLib.getDocument(
+            pdfUrl
+          ).promise;
 
-    pageBox.appendChild(canvas);
 
-    viewer.appendChild(pageBox);
+        totalPages =
+          pdf.numPages;
 
-    await renderPage(
-      i,
+
+        await renderAllPages();
+
+
+        updateVisiblePages();
+
+
+        updateCounter();
+
+
+        document
+          .getElementById("loading")
+          .style.opacity = "0";
+
+
+        setTimeout(() => {
+
+          document
+            .getElementById("loading")
+            .style.display = "none";
+
+        }, 400);
+
+
+      } catch(error) {
+
+        console.error(error);
+
+
+        document
+          .getElementById("loading")
+          .innerHTML = `
+
+            <div style="
+              text-align:center;
+              padding:30px;
+            ">
+
+              <div style="
+                font-family:'Cormorant Garamond';
+                font-size:40px;
+                margin-bottom:15px;
+              ">
+                Bir sorun oluştu.
+              </div>
+
+              <div style="
+                font-size:13px;
+                color:#765d67;
+              ">
+                Dergi dosyası bulunamadı.
+                <br><br>
+                PDF dosyasının
+                <b>dergi/01-eylul.pdf</b>
+                konumunda olduğundan emin ol.
+              </div>
+
+            </div>
+          `;
+
+      }
+
+    }
+
+
+    /*
+      TÜM SAYFALARI OLUŞTUR
+    */
+
+    async function renderAllPages() {
+
+      viewer.innerHTML = "";
+
+
+      for (
+        let i = 1;
+        i <= totalPages;
+        i++
+      ) {
+
+        const pageBox =
+          document.createElement("div");
+
+
+        pageBox.className =
+          "page";
+
+
+        pageBox.dataset.page =
+          i;
+
+
+        const canvas =
+          document.createElement("canvas");
+
+
+        /*
+          PDF SAYFA NUMARASI EKLENMİYOR
+        */
+
+        pageBox.appendChild(canvas);
+
+        viewer.appendChild(pageBox);
+
+
+        await renderPage(
+          i,
+          canvas
+        );
+
+      }
+
+
+      updateVisiblePages();
+
+    }
+
+
+    /*
+      TEK SAYFAYI RENDER ET
+      ESKİ KALİTE MANTIĞI KORUNDU
+    */
+
+    async function renderPage(
+      pageNumber,
       canvas
-    );
-
-  }
-
-}
-
-
-/* SAYFA RENDER */
-
-async function renderPage(
-  pageNumber,
-  canvas
-) {
-
-  const page =
-    await pdf.getPage(pageNumber);
-
-  const baseViewport =
-    page.getViewport({
-      scale: 1
-    });
-
-
-  let targetWidth;
-
-
-  if (mode === "strip") {
-
-    targetWidth =
-      Math.min(
-        window.innerWidth * .95,
-        900
-      );
-
-  }
-
-  else {
-
-    if (
-      currentPage === 1 &&
-      pageNumber === 1
     ) {
 
-      targetWidth =
-        Math.min(
-          window.innerWidth * .70,
-          700
+      const page =
+        await pdf.getPage(
+          pageNumber
         );
 
-    }
 
-    else {
+      const baseViewport =
+        page.getViewport({
+          scale: 1
+        });
 
-      targetWidth =
+
+      const maxWidth =
         Math.min(
-          window.innerWidth * .45,
-          680
+          window.innerWidth * .9,
+          850
         );
 
-    }
 
-  }
-
-
-  targetWidth *= zoom;
+      let scale =
+        maxWidth /
+        baseViewport.width;
 
 
-  const scale =
-    targetWidth /
-    baseViewport.width;
+      if (
+        window.innerWidth > 700 &&
+        mode === "spread"
+      ) {
+
+        scale =
+          Math.min(
+            (window.innerWidth * .44) /
+            baseViewport.width,
+            1.5
+          );
+
+      }
 
 
-  const viewport =
-    page.getViewport({
-      scale
-    });
+      scale *= zoom;
 
 
-  const ratio =
-    Math.min(
-      window.devicePixelRatio || 1,
-      2
-    );
+      const viewport =
+        page.getViewport({
+          scale
+        });
 
 
-  canvas.width =
-    Math.floor(
-      viewport.width * ratio
-    );
-
-  canvas.height =
-    Math.floor(
-      viewport.height * ratio
-    );
+      const ratio =
+        window.devicePixelRatio || 1;
 
 
-  canvas.style.width =
-    "100%";
-
-  canvas.style.height =
-    "auto";
+      canvas.width =
+        viewport.width * ratio;
 
 
-  const context =
-    canvas.getContext("2d");
+      canvas.height =
+        viewport.height * ratio;
 
 
-  context.setTransform(
-    ratio,
-    0,
-    0,
-    ratio,
-    0,
-    0
-  );
+      canvas.style.width =
+        viewport.width + "px";
 
 
-  await page.render({
-
-    canvasContext:
-      context,
-
-    viewport:
-      viewport
-
-  }).promise;
-
-}
+      canvas.style.height =
+        viewport.height + "px";
 
 
-/* GÖRÜNEN SAYFALAR */
-
-function updateVisiblePages() {
-
-  const pages =
-    document.querySelectorAll(
-      ".page"
-    );
+      const context =
+        canvas.getContext("2d");
 
 
-  pages.forEach(page => {
-
-    page.style.display = "none";
-
-  });
-
-
-  /* ŞERİT */
-
-  if (mode === "strip") {
-
-    pages.forEach(page => {
-
-      page.style.display = "block";
-
-    });
-
-    viewer.classList.remove(
-      "cover-mode"
-    );
-
-    return;
-
-  }
-
-
-  /* KAPAK */
-
-  if (currentPage === 1) {
-
-    viewer.classList.add(
-      "cover-mode"
-    );
-
-    const cover =
-      document.querySelector(
-        '[data-page="1"]'
+      context.setTransform(
+        ratio,
+        0,
+        0,
+        ratio,
+        0,
+        0
       );
 
-    if (cover) {
 
-      cover.style.display =
-        "block";
+      await page.render({
+
+        canvasContext:
+          context,
+
+        viewport:
+          viewport
+
+      }).promise;
 
     }
 
-    return;
 
-  }
+    /*
+      GÖRÜNEN SAYFALAR
 
+      1       = KAPAK
+      2 | 3   = İLK SPREAD
+      4 | 5
+      6 | 7
+      ...
+    */
 
-  viewer.classList.remove(
-    "cover-mode"
-  );
+    function updateVisiblePages() {
 
-
-  /* İÇ SAYFALAR */
-
-  const first =
-    document.querySelector(
-      `[data-page="${currentPage}"]`
-    );
-
-  const second =
-    document.querySelector(
-      `[data-page="${currentPage + 1}"]`
-    );
+      const pages =
+        document.querySelectorAll(
+          ".page"
+        );
 
 
-  if (first) {
+      pages.forEach(page => {
 
-    first.style.display =
-      "block";
+        page.classList.remove(
+          "visible"
+        );
 
-  }
+        page.style.display =
+          "none";
 
-
-  if (second) {
-
-    second.style.display =
-      "block";
-
-  }
-
-}
+      });
 
 
-/* ÖNCEKİ */
+      /*
+        ŞERİT MODU
+      */
 
-function previousPage() {
+      if (mode === "strip") {
 
-  if (mode === "strip") {
+        viewer.classList.remove(
+          "cover"
+        );
 
-    if (currentPage > 1) {
 
-      currentPage--;
+        pages.forEach(page => {
+
+          page.classList.add(
+            "visible"
+          );
+
+          page.style.display =
+            "block";
+
+        });
+
+
+        return;
+
+      }
+
+
+      /*
+        KAPAK
+      */
+
+      if (currentPage === 1) {
+
+        viewer.classList.add(
+          "cover"
+        );
+
+
+        const cover =
+          document.querySelector(
+            '[data-page="1"]'
+          );
+
+
+        if (cover) {
+
+          cover.classList.add(
+            "visible"
+          );
+
+          cover.style.display =
+            "block";
+
+        }
+
+
+        return;
+
+      }
+
+
+      /*
+        İÇ SAYFALAR
+      */
+
+      viewer.classList.remove(
+        "cover"
+      );
+
+
+      const first =
+        document.querySelector(
+          `[data-page="${currentPage}"]`
+        );
+
+
+      const second =
+        document.querySelector(
+          `[data-page="${currentPage + 1}"]`
+        );
+
+
+      if (first) {
+
+        first.classList.add(
+          "visible"
+        );
+
+        first.style.display =
+          "block";
+
+      }
+
+
+      if (second) {
+
+        second.classList.add(
+          "visible"
+        );
+
+        second.style.display =
+          "block";
+
+      }
+
+    }
+
+
+    /*
+      ÖNCEKİ SAYFA
+    */
+
+    function previousPage() {
+
+      if (currentPage <= 1) {
+
+        return;
+
+      }
+
+
+      if (mode === "spread") {
+
+        /*
+          2 → 1
+          4 → 2
+          6 → 4
+        */
+
+        if (currentPage === 2) {
+
+          currentPage = 1;
+
+        } else {
+
+          currentPage -= 2;
+
+        }
+
+      }
+
+      else {
+
+        currentPage--;
+
+      }
+
+
+      updateVisiblePages();
 
       updateCounter();
 
-      scrollToPage(currentPage);
+
+      if (mode === "strip") {
+
+        scrollToPage(
+          currentPage
+        );
+
+      }
 
     }
 
-    return;
 
-  }
+    /*
+      SONRAKİ SAYFA
+    */
 
+    function nextPage() {
 
-  if (currentPage === 1) {
+      if (
+        currentPage >= totalPages
+      ) {
 
-    return;
+        return;
 
-  }
-
-
-  if (currentPage === 2) {
-
-    currentPage = 1;
-
-  }
-
-  else {
-
-    currentPage -= 2;
-
-  }
+      }
 
 
-  updateVisiblePages();
+      if (mode === "spread") {
 
-  updateCounter();
+        /*
+          1 → 2
+          2 → 4
+          4 → 6
+          6 → 8
+        */
 
-}
+        if (currentPage === 1) {
+
+          currentPage = 2;
+
+        } else {
+
+          currentPage += 2;
+
+        }
 
 
-/* SONRAKİ */
+        if (
+          currentPage > totalPages
+        ) {
 
-function nextPage() {
+          currentPage =
+            totalPages;
 
-  if (mode === "strip") {
+        }
 
-    if (currentPage < totalPages) {
+      }
 
-      currentPage++;
+      else {
+
+        currentPage++;
+
+      }
+
+
+      updateVisiblePages();
 
       updateCounter();
 
-      scrollToPage(currentPage);
+
+      if (mode === "strip") {
+
+        scrollToPage(
+          currentPage
+        );
+
+      }
 
     }
 
-    return;
 
-  }
+    /*
+      SAYFA NUMARASI
+    */
 
+    function updateCounter() {
 
-  if (currentPage === 1) {
+      if (!totalPages) {
 
-    currentPage = 2;
+        counter.textContent =
+          "1 / ...";
 
-  }
+        return;
 
-  else {
+      }
 
-    currentPage += 2;
 
-  }
+      if (mode === "strip") {
 
+        counter.textContent =
+          `${currentPage} / ${totalPages}`;
 
-  if (currentPage > totalPages) {
+        return;
 
-    currentPage = totalPages;
+      }
 
-  }
 
+      if (currentPage === 1) {
 
-  updateVisiblePages();
+        counter.textContent =
+          `Kapak / ${totalPages}`;
 
-  updateCounter();
+        return;
 
-}
+      }
 
 
-/* COUNTER */
+      const second =
+        Math.min(
+          currentPage + 1,
+          totalPages
+        );
 
-function updateCounter() {
 
-  if (!totalPages) {
+      counter.textContent =
+        `${currentPage}–${second} / ${totalPages}`;
 
-    counter.textContent =
-      "1 / ...";
+    }
 
-    return;
 
-  }
+    /*
+      ŞERİT MODUNDA SAYFAYA GİT
+    */
 
-
-  if (mode === "strip") {
-
-    counter.textContent =
-      `${currentPage} / ${totalPages}`;
-
-    return;
-
-  }
-
-
-  if (currentPage === 1) {
-
-    counter.textContent =
-      `Kapak / ${totalPages}`;
-
-    return;
-
-  }
-
-
-  const second =
-    Math.min(
-      currentPage + 1,
-      totalPages
-    );
-
-
-  counter.textContent =
-    `${currentPage}–${second} / ${totalPages}`;
-
-}
-
-
-/* ŞERİT */
-
-function scrollToPage(
-  pageNumber
-) {
-
-  const page =
-    document.querySelector(
-      `[data-page="${pageNumber}"]`
-    );
-
-  if (page) {
-
-    page.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-
-  }
-
-}
-
-
-/* MOD DEĞİŞTİR */
-
-function setMode(newMode) {
-
-  mode =
-    newMode;
-
-
-  viewer.className =
-    newMode;
-
-
-  document
-    .getElementById("spreadButton")
-    .classList
-    .toggle(
-      "active",
-      newMode === "spread"
-    );
-
-
-  document
-    .getElementById("stripButton")
-    .classList
-    .toggle(
-      "active",
-      newMode === "strip"
-    );
-
-
-  updateVisiblePages();
-
-  updateCounter();
-
-  rerender();
-
-}
-
-
-/* ZOOM */
-
-function zoomIn() {
-
-  zoom =
-    Math.min(
-      zoom + .1,
-      1.5
-    );
-
-  rerender();
-
-}
-
-
-function zoomOut() {
-
-  zoom =
-    Math.max(
-      zoom - .1,
-      .7
-    );
-
-  rerender();
-
-}
-
-
-/* YENİDEN RENDER */
-
-async function rerender() {
-
-  if (!pdf) {
-
-    return;
-
-  }
-
-
-  const canvases =
-    document.querySelectorAll(
-      ".page canvas"
-    );
-
-
-  for (
-    let i = 0;
-    i < canvases.length;
-    i++
-  ) {
-
-    await renderPage(
-      i + 1,
-      canvases[i]
-    );
-
-  }
-
-
-  updateVisiblePages();
-
-}
-
-
-/* FULLSCREEN */
-
-function fullScreen() {
-
-  if (!document.fullscreenElement) {
-
-    document.documentElement
-      .requestFullscreen();
-
-  }
-
-  else {
-
-    document.exitFullscreen();
-
-  }
-
-}
-
-
-/* KLAVYE */
-
-document.addEventListener(
-  "keydown",
-  event => {
-
-    if (
-      event.key === "ArrowLeft"
+    function scrollToPage(
+      pageNumber
     ) {
 
-      previousPage();
+      const page =
+        document.querySelector(
+          `[data-page="${pageNumber}"]`
+        );
+
+
+      if (page) {
+
+        page.scrollIntoView({
+
+          behavior: "smooth",
+
+          block: "center"
+
+        });
+
+      }
 
     }
 
-    if (
-      event.key === "ArrowRight"
-    ) {
 
-      nextPage();
+    /*
+      YAKINLAŞTIR
+    */
+
+    function zoomIn() {
+
+      zoom =
+        Math.min(
+          zoom + .1,
+          1.6
+        );
+
+
+      rerender();
 
     }
 
-  }
-);
+
+    /*
+      UZAKLAŞTIR
+    */
+
+    function zoomOut() {
+
+      zoom =
+        Math.max(
+          zoom - .1,
+          .7
+        );
 
 
-/* EKRAN BOYUTU */
+      rerender();
 
-window.addEventListener(
-  "resize",
-  () => {
-
-    rerender();
-
-  }
-);
+    }
 
 
-/* BAŞLAT */
+    /*
+      YENİDEN RENDER
+    */
 
-loadPDF();
+    async function rerender() {
 
-</script>
+      if (!pdf) {
+
+        return;
+
+      }
+
+
+      const canvases =
+        document.querySelectorAll(
+          ".page canvas"
+        );
+
+
+      for (
+        let i = 0;
+        i < canvases.length;
+        i++
+      ) {
+
+        await renderPage(
+          i + 1,
+          canvases[i]
+        );
+
+      }
+
+
+      updateVisiblePages();
+
+    }
+
+
+    /*
+      TAM EKRAN
+    */
+
+    function fullScreen() {
+
+      if (
+        !document.fullscreenElement
+      ) {
+
+        document.documentElement
+          .requestFullscreen();
+
+      }
+
+      else {
+
+        document.exitFullscreen();
+
+      }
+
+    }
+
+
+    /*
+      KLAVYE
+
+      ← önceki
+      → sonraki
+    */
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key === "ArrowLeft"
+        ) {
+
+          previousPage();
+
+        }
+
+
+        if (
+          event.key === "ArrowRight"
+        ) {
+
+          nextPage();
+
+        }
+
+      }
+    );
+
+
+    /*
+      TELEFON DÖNÜNCE
+    */
+
+    window.addEventListener(
+      "resize",
+      () => {
+
+        rerender();
+
+      }
+    );
+
+
+    /*
+      BAŞLAT
+    */
+
+    loadPDF();
+
+  </script>
 
 </body>
+
 </html>
