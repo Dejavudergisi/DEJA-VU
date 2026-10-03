@@ -5,19 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>DEJAVU — 02 Ekim</title>
-
-  <meta
-    name="description"
-    content="DEJAVU. Ekim sayımızla buradayız."
-  >
+  <meta name="description" content="DEJAVU. Ekim sayımızla buradayız.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- BREVO -->
+  <style>
+    @font-face {
+      font-display: block;
+      font-family: Roboto;
+      src: url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/7529907e9eaf8ebb5220c5f9850e3811.woff2) format("woff2"),
+           url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/25c678feafdc175a70922a116c9be3e7.woff) format("woff");
+    }
+
+    @font-face {
+      font-display: fallback;
+      font-family: Roboto;
+      font-weight: 600;
+      src: url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/6e9caeeafb1f3491be3e32744bc30440.woff2) format("woff2"),
+           url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/71501f0d8d5aa95960f6475d5487d4c2.woff) format("woff");
+    }
+
+    :where(.sib-form-message-panel) {
+      display: none;
+    }
+
+    :where(.sib-form-message-panel .sib-notification__icon) {
+      width: 20px;
+      height: 20px;
+    }
+
+    #sib-container input:-ms-input-placeholder {
+      font-family: "DM Sans", sans-serif;
+      text-align: left;
+      color: #9c8d94;
+    }
+
+    #sib-container input::placeholder {
+      font-family: "DM Sans", sans-serif;
+      text-align: left;
+      color: #9c8d94;
+    }
+
+    #sib-container a {
+      text-decoration: underline;
+      color: #d96f88;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
 
   <style>
     :root {
@@ -29,7 +68,9 @@
       --lavender: #b9a5d8;
       --wine: #482634;
       --dark: #292329;
+      --muted: #766b70;
       --white: #ffffff;
+      --border: rgba(72, 38, 52, 0.12);
     }
 
     * {
@@ -44,7 +85,7 @@
 
     body {
       font-family: "DM Sans", sans-serif;
-      background: var(--cream);
+      background: var(--cream-2);
       color: var(--dark);
       overflow-x: hidden;
     }
@@ -54,471 +95,511 @@
       text-decoration: none;
     }
 
-    /* SOFT BACKGROUND */
+    button,
+    input {
+      font: inherit;
+    }
+
+    /* BACKGROUND BLOBS */
 
     body::before,
     body::after {
       content: "";
       position: fixed;
-      width: 420px;
-      height: 420px;
+      z-index: -2;
       border-radius: 50%;
-      filter: blur(70px);
-      opacity: 0.22;
+      filter: blur(80px);
+      opacity: .35;
       pointer-events: none;
-      z-index: -1;
     }
 
     body::before {
-      top: -160px;
-      left: -120px;
+      width: 420px;
+      height: 420px;
       background: var(--pink);
+      top: -160px;
+      right: -100px;
     }
 
     body::after {
-      right: -150px;
-      top: 40%;
+      width: 420px;
+      height: 420px;
       background: var(--lavender);
+      bottom: -180px;
+      left: -120px;
     }
 
-    /* NAV */
+    /* NAVBAR */
 
-    header {
+    nav {
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      background: rgba(248, 238, 233, 0.82);
-      border-bottom: 1px solid rgba(72, 38, 52, 0.08);
-    }
-
-    .nav {
-      width: min(1180px, calc(100% - 40px));
-      min-height: 78px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 30px;
-    }
-
-    .logo {
-      width: 115px;
-      display: block;
-      flex-shrink: 0;
-    }
-
-    .logo img {
       width: 100%;
-      display: block;
+      padding: 20px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 248, 245, .82);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(72, 38, 52, .08);
+    }
+
+    .nav-logo {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      color: var(--wine);
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 28px;
-      font-size: 11px;
+      gap: 30px;
+      font-size: 12px;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: .12em;
     }
 
     .nav-links a {
-      position: relative;
-      transition: color 0.25s ease;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -7px;
-      width: 0;
-      height: 1px;
-      background: var(--pink-strong);
-      transition: width 0.25s ease;
+      transition: color .25s ease;
     }
 
     .nav-links a:hover {
       color: var(--pink-strong);
     }
 
-    .nav-links a:hover::after {
-      width: 100%;
+    .menu-button {
+      display: none;
+      border: 0;
+      background: none;
+      font-size: 25px;
+      color: var(--wine);
+      cursor: pointer;
     }
 
     /* HERO */
 
     .hero {
-      width: min(1180px, calc(100% - 40px));
-      min-height: calc(100vh - 78px);
-      margin: auto;
-      padding: 80px 0 90px;
-
+      min-height: 88vh;
+      padding: 90px 7% 80px;
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 70px;
       align-items: center;
-      gap: 80px;
     }
 
     .eyebrow {
       font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
+      font-weight: 700;
+      letter-spacing: .22em;
       color: var(--pink-strong);
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .hero h1 {
       font-family: "Cormorant Garamond", serif;
-      font-size: clamp(70px, 9vw, 125px);
+      font-size: clamp(65px, 9vw, 130px);
+      line-height: .82;
       font-weight: 500;
-      line-height: 0.82;
       color: var(--wine);
       margin-bottom: 35px;
     }
 
     .hero h1 span {
       display: block;
-      font-style: italic;
+      color: var(--dark);
     }
 
     .hero-text {
-      max-width: 500px;
-      font-size: 15px;
+      max-width: 530px;
+      font-size: 17px;
       line-height: 1.8;
-      color: rgba(41, 35, 41, 0.72);
-      margin-bottom: 32px;
+      color: var(--muted);
+      margin-bottom: 35px;
     }
 
-    .primary-button {
+    .button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 14px 24px;
+      padding: 15px 27px;
       border-radius: 999px;
       background: var(--wine);
       color: white;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      transition:
-        background 0.25s ease,
-        transform 0.25s ease;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      transition: transform .25s ease, background .25s ease;
     }
 
-    .primary-button:hover {
-      background: var(--pink-strong);
+    .button:hover {
       transform: translateY(-2px);
+      background: var(--pink-strong);
     }
 
     .hero-cover {
-      position: relative;
+      display: flex;
+      justify-content: center;
     }
 
-    .hero-cover::before {
-      content: "";
-      position: absolute;
-      width: 75%;
-      height: 75%;
-      right: -10%;
-      bottom: -10%;
-      background: var(--coral);
-      opacity: 0.25;
-      filter: blur(55px);
-      border-radius: 50%;
-      z-index: -1;
+    .cover-frame {
+      width: min(100%, 450px);
+      padding: 12px;
+      background: rgba(255,255,255,.6);
+      border: 1px solid rgba(72,38,52,.1);
+      box-shadow: 0 25px 70px rgba(72,38,52,.14);
+      transform: rotate(2deg);
+      transition: transform .5s ease;
     }
 
-    .hero-cover img {
-      width: 100%;
-      max-width: 480px;
-      display: block;
-      margin: auto;
-      border-radius: 26px;
-      box-shadow: 0 35px 70px rgba(72, 38, 52, 0.18);
-      transform: rotate(1.2deg);
-      transition: transform 0.4s ease;
-    }
-
-    .hero-cover img:hover {
+    .cover-frame:hover {
       transform: rotate(0deg) translateY(-5px);
+    }
+
+    .cover-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* SECTIONS */
+
+    section {
+      padding: 110px 7%;
+    }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      color: var(--pink-strong);
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(45px, 6vw, 75px);
+      line-height: .95;
+      font-weight: 500;
+      color: var(--wine);
+    }
+
+    .section-text {
+      max-width: 680px;
+      margin-top: 28px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 16px;
     }
 
     /* WELCOME */
 
-    .section {
-      width: min(1080px, calc(100% - 40px));
-      margin: auto;
-    }
-
     .welcome {
-      padding: 120px 0;
-      text-align: center;
+      background: var(--cream);
     }
 
-    .section-eyebrow {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      color: var(--pink-strong);
-      margin-bottom: 18px;
-    }
-
-    .welcome h2 {
-      font-family: "Cormorant Garamond", serif;
-      font-size: clamp(45px, 6vw, 70px);
-      font-weight: 500;
-      color: var(--wine);
-      margin-bottom: 22px;
-    }
-
-    .welcome p {
-      max-width: 650px;
-      margin: auto;
-      font-size: 15px;
-      line-height: 1.9;
-      color: rgba(41, 35, 41, 0.68);
+    .welcome-inner {
+      max-width: 900px;
     }
 
     /* ISSUE */
 
     .issue-section {
-      padding: 40px 0 130px;
+      background: var(--cream-2);
     }
 
-    .issue-box {
+    .issue-card {
+      margin-top: 55px;
       display: grid;
-      grid-template-columns: 0.8fr 1.2fr;
+      grid-template-columns: 280px 1fr;
+      gap: 50px;
       align-items: center;
-      gap: 75px;
-
-      padding: 60px;
-      border-radius: 34px;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255,255,255,0.65),
-          rgba(234,162,177,0.18)
-        );
-
-      border: 1px solid rgba(72, 38, 52, 0.07);
-      box-shadow: 0 25px 70px rgba(72, 38, 52, 0.08);
+      padding: 35px;
+      background: rgba(255,255,255,.65);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: 0 20px 60px rgba(72,38,52,.06);
     }
 
-    .issue-cover img {
+    .issue-card img {
       width: 100%;
-      max-width: 340px;
       display: block;
-      margin: auto;
-      border-radius: 18px;
-      box-shadow: 0 25px 50px rgba(72, 38, 52, 0.16);
+      border-radius: 3px;
+      box-shadow: 0 15px 35px rgba(72,38,52,.12);
     }
 
     .issue-number {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 70px;
+      line-height: .9;
+      color: var(--wine);
+    }
+
+    .issue-date {
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .15em;
       color: var(--pink-strong);
-      margin-bottom: 12px;
     }
 
-    .issue-content h2 {
-      font-family: "Cormorant Garamond", serif;
-      font-size: clamp(52px, 7vw, 82px);
-      font-weight: 500;
-      color: var(--wine);
-      line-height: 0.9;
-      margin-bottom: 25px;
-    }
-
-    .issue-content p {
-      max-width: 500px;
-      font-size: 14px;
+    .issue-description {
+      margin: 25px 0;
+      max-width: 550px;
       line-height: 1.8;
-      color: rgba(41, 35, 41, 0.68);
-      margin-bottom: 25px;
-    }
-
-    .reading-note {
-      font-size: 11px !important;
-      opacity: 0.65;
-      margin-top: -8px;
-    }
-
-    /* ABOUT */
-
-    .about {
-      padding: 100px 0 130px;
-      text-align: center;
-    }
-
-    .about h2 {
-      font-family: "Cormorant Garamond", serif;
-      font-size: clamp(45px, 6vw, 70px);
-      font-weight: 500;
-      color: var(--wine);
-      margin-bottom: 20px;
-    }
-
-    .about p {
-      max-width: 650px;
-      margin: auto;
-      font-size: 15px;
-      line-height: 1.9;
-      color: rgba(41, 35, 41, 0.68);
+      color: var(--muted);
     }
 
     /* NEWSLETTER */
 
     .newsletter {
-      margin-bottom: 120px;
-      padding: 65px 50px;
-      border-radius: 34px;
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255,255,255,0.68),
-          rgba(234,162,177,0.20)
-        );
-      border: 1px solid rgba(72, 38, 52, 0.07);
-      text-align: center;
-      box-shadow: 0 25px 70px rgba(72, 38, 52, 0.07);
+      background: var(--wine);
+      color: white;
     }
 
-    .newsletter h2 {
-      font-family: "Cormorant Garamond", serif;
-      font-size: clamp(45px, 6vw, 68px);
-      font-weight: 500;
-      color: var(--wine);
-      margin-bottom: 15px;
+    .newsletter .section-label {
+      color: var(--pink);
     }
 
-    .newsletter p {
-      max-width: 540px;
-      margin: 0 auto 25px;
-      font-size: 14px;
-      line-height: 1.8;
-      color: rgba(41, 35, 41, 0.68);
+    .newsletter .section-title {
+      color: white;
     }
 
-    .newsletter-placeholder {
+    .newsletter-intro {
       max-width: 600px;
-      margin: auto;
-      padding: 24px;
-      font-size: 12px;
-      color: rgba(41, 35, 41, 0.55);
+      margin-top: 20px;
+      color: rgba(255,255,255,.72);
+      line-height: 1.7;
+    }
+
+    .brevo-wrapper {
+      max-width: 680px;
+      margin-top: 45px;
+    }
+
+    /* Brevo'nun dış kutusunu DEJAVU'ya uyduruyoruz */
+
+    .brevo-wrapper .sib-form {
+      background: transparent !important;
+      text-align: left !important;
+      padding: 0 !important;
+    }
+
+    .brevo-wrapper #sib-form-container {
+      width: 100%;
+    }
+
+    .brevo-wrapper #sib-container {
+      max-width: 100% !important;
+      width: 100%;
+      padding: 28px !important;
+      background: rgba(255,255,255,.08) !important;
+      border: 1px solid rgba(255,255,255,.16) !important;
+      border-radius: 20px !important;
+      direction: ltr;
+    }
+
+    .brevo-wrapper .sib-form-block {
+      padding: 7px 0 !important;
+    }
+
+    .brevo-wrapper .sib-form-block p {
+      margin: 0;
+    }
+
+    .brevo-wrapper .sib-input {
+      padding: 0 !important;
+    }
+
+    .brevo-wrapper .form__label-row {
+      display: block;
+    }
+
+    .brevo-wrapper .entry__label {
+      color: rgba(255,255,255,.9) !important;
+      font-family: "DM Sans", sans-serif !important;
+      font-size: 13px !important;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .brevo-wrapper .entry__field {
+      width: 100%;
+      border: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+
+    .brevo-wrapper input[type="text"] {
+      width: 100% !important;
+      height: 52px !important;
+      padding: 0 17px !important;
+      border-radius: 12px !important;
+      border: 1px solid rgba(255,255,255,.22) !important;
+      background: rgba(255,255,255,.96) !important;
+      color: var(--dark) !important;
+      font-family: "DM Sans", sans-serif !important;
+      font-size: 14px !important;
+      box-shadow: none !important;
+    }
+
+    .brevo-wrapper input[type="text"]:focus {
+      outline: none !important;
+      border-color: var(--pink) !important;
+    }
+
+    .brevo-wrapper .entry__specification {
+      color: rgba(255,255,255,.55) !important;
+      font-family: "DM Sans", sans-serif !important;
+      font-size: 11px !important;
+    }
+
+    .brevo-wrapper .sib-form-block__button {
+      width: 100% !important;
+      min-height: 52px !important;
+      border-radius: 999px !important;
+      border: 0 !important;
+      background: var(--pink) !important;
+      color: var(--wine) !important;
+      font-family: "DM Sans", sans-serif !important;
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      letter-spacing: .08em;
+      text-align: center !important;
+      cursor: pointer;
+      transition: .25s ease;
+    }
+
+    .brevo-wrapper .sib-form-block__button:hover {
+      background: var(--coral) !important;
+      transform: translateY(-1px);
+    }
+
+    .brevo-wrapper .sib-form-message-panel {
+      max-width: 100% !important;
+      border-radius: 12px !important;
+      margin-bottom: 15px;
+      padding: 15px !important;
     }
 
     /* CONTACT */
 
     .contact {
-      padding: 30px 0 110px;
-      text-align: center;
+      background: var(--cream);
     }
 
-    .contact h2 {
+    .contact-mail {
+      display: inline-block;
+      margin-top: 35px;
       font-family: "Cormorant Garamond", serif;
-      font-size: clamp(45px, 6vw, 68px);
-      font-weight: 500;
+      font-size: clamp(30px, 5vw, 55px);
       color: var(--wine);
-      margin-bottom: 20px;
+      border-bottom: 1px solid var(--pink);
+      transition: color .25s ease;
     }
 
-    .contact p {
-      font-size: 14px;
-      line-height: 1.8;
-      color: rgba(41, 35, 41, 0.68);
+    .contact-mail:hover {
+      color: var(--pink-strong);
     }
 
     /* FOOTER */
 
     footer {
-      padding: 40px 20px;
-      text-align: center;
-      border-top: 1px solid rgba(72, 38, 52, 0.08);
+      padding: 35px 7%;
+      background: var(--cream);
+      border-top: 1px solid rgba(72,38,52,.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-logo {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 25px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      color: var(--wine);
+    }
+
+    footer p {
       font-size: 11px;
-      letter-spacing: 0.08em;
-      color: rgba(41, 35, 41, 0.55);
+      color: var(--muted);
     }
 
     /* MOBILE */
 
-    @media (max-width: 850px) {
+    @media (max-width: 800px) {
 
-      .nav {
-        min-height: 70px;
+      nav {
+        padding: 17px 6%;
       }
 
       .nav-links {
-        gap: 14px;
-        font-size: 9px;
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 25px 6%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        background: rgba(255,248,245,.97);
+        border-bottom: 1px solid var(--border);
       }
 
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 55px;
-        padding-top: 65px;
+      .nav-links.active {
+        display: flex;
       }
 
-      .hero-content {
-        text-align: center;
-      }
-
-      .hero-text {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .hero-cover {
-        max-width: 500px;
-        margin: auto;
-      }
-
-      .issue-box {
-        grid-template-columns: 1fr;
-        gap: 50px;
-        padding: 40px 28px;
-      }
-
-      .issue-content {
-        text-align: center;
-      }
-
-      .issue-content p {
-        margin-left: auto;
-        margin-right: auto;
-      }
-    }
-
-    @media (max-width: 500px) {
-
-      .nav {
-        width: calc(100% - 28px);
-      }
-
-      .logo {
-        width: 92px;
-      }
-
-      .nav-links {
-        gap: 9px;
-        font-size: 7.5px;
-      }
-
-      .hero,
-      .section {
-        width: calc(100% - 28px);
+      .menu-button {
+        display: block;
       }
 
       .hero {
         min-height: auto;
-        padding: 70px 0 80px;
+        padding: 70px 6% 80px;
+        grid-template-columns: 1fr;
+        gap: 55px;
       }
 
-      .newsletter {
-        padding: 45px 20px;
+      .hero h1 {
+        font-size: clamp(62px, 19vw, 100px);
+      }
+
+      .hero-text {
+        font-size: 15px;
+      }
+
+      section {
+        padding: 80px 6%;
+      }
+
+      .issue-card {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding: 25px;
+      }
+
+      .issue-card img {
+        max-width: 280px;
+        margin: auto;
+      }
+
+      .issue-number {
+        font-size: 58px;
+      }
+
+      .brevo-wrapper #sib-container {
+        padding: 20px !important;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
@@ -526,25 +607,23 @@
 
 <body>
 
-  <!-- NAV -->
+  <!-- NAVBAR -->
 
-  <header>
-    <nav class="nav">
+  <nav>
+    <a href="index.html" class="nav-logo">DEJAVU</a>
 
-      <a href="index.html" class="logo">
-        <img src="logo.jpg" alt="DEJAVU">
-      </a>
+    <button class="menu-button" onclick="toggleMenu()" aria-label="Menüyü aç">
+      ☰
+    </button>
 
-      <div class="nav-links">
-        <a href="index.html">ANA SAYFA</a>
-        <a href="#dergi">DERGİ</a>
-        <a href="arsiv.html">ARŞİV</a>
-        <a href="#hakkimizda">HAKKIMIZDA</a>
-        <a href="#iletisim">İLETİŞİM</a>
-      </div>
-
-    </nav>
-  </header>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">ANA SAYFA</a>
+      <a href="#dergi">DERGİ</a>
+      <a href="arsiv.html">ARŞİV</a>
+      <a href="#hakkimizda">HAKKIMIZDA</a>
+      <a href="#iletisim">İLETİŞİM</a>
+    </div>
+  </nav>
 
 
   <!-- HERO -->
@@ -565,16 +644,14 @@
         </h1>
 
         <p class="hero-text">
-          İkinci sayımızla buradayız.
-          Birlikte bakmak, okumak ve keşfetmek için
+          İkinci sayımızla buradayız. Birlikte bakmak, okumak ve keşfetmek için
           küçük bir alan.
         </p>
 
         <a
-          href="reader.html?pdf=dergi/02-ekim.pdf"
-          class="primary-button"
-        >
-          02 EKİM'İ OKU
+          class="button"
+          href="reader.html?pdf=dergi/02-ekim.pdf">
+          DERGİYİ OKU →
         </a>
 
       </div>
@@ -582,82 +659,86 @@
 
       <div class="hero-cover">
 
-        <img
-          src="images/02-ekim-kapak.jpg"
-          alt="DEJAVU 02 Ekim 2026 kapak"
-        >
-
-      </div>
-
-    </section>
-
-
-    <!-- WELCOME -->
-
-    <section class="section welcome" id="hakkimizda">
-
-      <div class="section-eyebrow">
-        MERHABA
-      </div>
-
-      <h2>
-        Yeni bir sayı.
-        Yeni bir merhaba.
-      </h2>
-
-      <p>
-        DEJAVU, farklı bakışların, hikâyelerin ve fikirlerin
-        aynı yerde buluştuğu bir yayın alanı.
-        Ekim sayımızla birlikte bu yolculuğun
-        ikinci sayfasını açıyoruz.
-      </p>
-
-    </section>
-
-
-    <!-- ISSUE -->
-
-    <section class="section issue-section" id="dergi">
-
-      <div class="issue-box">
-
-        <div class="issue-cover">
-
+        <div class="cover-frame">
           <img
             src="images/02-ekim-kapak.jpg"
-            alt="DEJAVU 02 Ekim 2026"
-          >
-
+            alt="DEJAVU 02 Ekim 2026 kapak">
         </div>
 
+      </div>
 
-        <div class="issue-content">
+    </section>
+
+
+    <!-- HAKKIMIZDA -->
+
+    <section class="welcome" id="hakkimizda">
+
+      <div class="welcome-inner">
+
+        <div class="section-label">
+          MERHABA
+        </div>
+
+        <h2 class="section-title">
+          Yeni bir sayı.<br>
+          Yeni bir merhaba.
+        </h2>
+
+        <p class="section-text">
+          DEJAVU; kadınların dünyasına, gündelik hayatın küçük detaylarına,
+          modaya, kültüre, güzelliğe ve biraz da hayatın kendisine bakan
+          dijital bir dergi.
+        </p>
+
+        <p class="section-text">
+          Bazen bir kahve masasında konuşulanları, bazen sokakta gördüğümüz
+          bir şeyi, bazen de uzun zamandır aklımızda olan bir soruyu sayfalara
+          taşıyoruz.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- DERGİ -->
+
+    <section class="issue-section" id="dergi">
+
+      <div class="section-label">
+        DEJAVU · SAYI 02
+      </div>
+
+      <h2 class="section-title">
+        Ekim sayısı.
+      </h2>
+
+      <div class="issue-card">
+
+        <img
+          src="images/02-ekim-kapak.jpg"
+          alt="DEJAVU 02 Ekim 2026">
+
+        <div>
 
           <div class="issue-number">
-            DEJAVU · SAYI 02
+            02
           </div>
 
-          <h2>
-            02<br>
-            EKİM
-          </h2>
+          <div class="issue-date">
+            EKİM 2026
+          </div>
 
-          <p>
-            Ekim sayımız şimdi yayında.
-            Dergiyi doğrudan tarayıcından okuyabilir,
-            sayfalar arasında geçebilir ve
-            istediğin yerde okumaya devam edebilirsin.
-          </p>
-
-          <p class="reading-note">
-            Yan yana veya şerit görünümünü seçebilirsin.
+          <p class="issue-description">
+            Yeni sayımız yayında. Modadan güzelliğe, şehir hayatından
+            kültüre uzanan Ekim sayısını keşfetmek için dergiyi aç.
           </p>
 
           <a
-            href="reader.html?pdf=dergi/02-ekim.pdf"
-            class="primary-button"
-          >
-            DERGİYİ OKU
+            class="button"
+            href="reader.html?pdf=dergi/02-ekim.pdf">
+            OKUMAYA BAŞLA →
           </a>
 
         </div>
@@ -667,89 +748,326 @@
     </section>
 
 
-    <!-- ABOUT -->
-
-    <section class="section about">
-
-      <div class="section-eyebrow">
-        DEJAVU
-      </div>
-
-      <h2>
-        Biraz bizden.
-      </h2>
-
-      <p>
-        DEJAVU; moda, kültür, güzellik, ilişkiler,
-        şehir hayatı, popüler kültür ve kadınların
-        gündelik dünyasından ilham alan bağımsız
-        bir dijital dergi.
-        <br><br>
-        Bazen ciddi, bazen eğlenceli,
-        bazen de sadece güzel şeylere bakmak için.
-      </p>
-
-    </section>
-
-
     <!-- NEWSLETTER -->
 
-    <section class="section newsletter" id="bulten">
+    <section class="newsletter">
 
-      <div class="section-eyebrow">
+      <div class="section-label">
         POSTA KUTUNA DEJAVU
       </div>
 
-      <h2>
+      <h2 class="section-title">
         Yeni sayıyı kaçırma.
       </h2>
 
-      <p>
-        Yeni DEJAVU yayımlandığında sana haber verelim.
-        Arşivi okumak için kayıt olman gerekmez;
-        e-posta aboneliği tamamen isteğe bağlıdır.
+      <p class="newsletter-intro">
+        Yeni sayımız yayımlandığında ilk senin haberin olsun.
+        E-posta adresini bırak, DEJAVU posta kutuna gelsin.
       </p>
 
-      <!--
-        BREVO FORMU BURAYA GELECEK.
 
-        Brevo'dan alacağımız form kodunu
-        bu yorumların yerine koyacağız.
-      -->
+      <div class="brevo-wrapper">
 
-      <div class="newsletter-placeholder">
-        Newsletter formu yakında burada.
+        <!-- BREVO FORM -->
+
+        <div class="sib-form">
+
+          <div id="sib-form-container">
+
+            <!-- HATA -->
+
+            <div
+              id="error-message"
+              class="sib-form-message-panel"
+              style="
+                font-family:DM Sans,sans-serif;
+                font-size:14px;
+                text-align:left;
+                color:#661d1d;
+                background-color:#ffeded;
+                border-color:#ff4949;
+                border-radius:12px;
+                max-width:100%;
+                padding:15px;
+              ">
+
+              <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+
+                <span class="sib-form-message-panel__inner-text">
+                  İşlem sırasında sorun çıktı. Lütfen tekrar deneyiniz.
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <!-- BAŞARILI -->
+
+            <div
+              id="success-message"
+              class="sib-form-message-panel"
+              style="
+                font-family:DM Sans,sans-serif;
+                font-size:14px;
+                text-align:left;
+                color:#085229;
+                background-color:#e7faf0;
+                border-color:#13ce66;
+                border-radius:12px;
+                max-width:100%;
+                padding:15px;
+              ">
+
+              <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+
+                <span class="sib-form-message-panel__inner-text">
+                  Aboneliğiniz onaylanmıştır. DEJAVU artık posta kutunuzda.
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <!-- FORM -->
+
+            <div id="sib-container">
+
+              <form
+                id="sib-form"
+                method="POST"
+                action="https://897125d3.sibforms.com/serve/MUIFABbf5kpQrpnkDMzF_RWA5YiwvUksjjqwlnwFtQGyF9J-o2Bt4urqmooL-2bnhGYcXt4U5Cgl-KH3RvVMXmz7fDFkVK7lvuFJQtSrcIxbOjMhTEhMrLTgThLMIpEgmb09F22F4N-7bgz8HC0GG-rD4vb6TqmTp1hxrMoI0-C3LuoIHQQGDgbJAv0WlfYXrGgK1RRiOvcZUrt_fw=="
+                data-type="subscription"
+              >
+
+                <div class="sib-form-block">
+
+                  <div
+                    style="
+                      font-family:Cormorant Garamond,serif;
+                      font-size:32px;
+                      font-weight:600;
+                      color:#ffffff;
+                    ">
+                    Aylık Hatırlatmanız
+                  </div>
+
+                </div>
+
+
+                <div class="sib-form-block">
+
+                  <div
+                    style="
+                      font-family:DM Sans,sans-serif;
+                      font-size:14px;
+                      line-height:1.7;
+                      color:rgba(255,255,255,.72);
+                    ">
+                    Her ay dergimizi ilk okuyanlardan biri olun.
+                  </div>
+
+                </div>
+
+
+                <div class="sib-input sib-form-block">
+
+                  <div class="form__entry entry_block">
+
+                    <div class="form__label-row">
+
+                      <label
+                        class="entry__label"
+                        for="EMAIL"
+                        data-required="*">
+                        Abone olmak için mail adresinizi giriniz.
+                      </label>
+
+                      <div class="entry__field">
+
+                        <input
+                          class="input"
+                          type="text"
+                          id="EMAIL"
+                          name="EMAIL"
+                          autocomplete="off"
+                          value=""
+                          placeholder="E-posta adresiniz"
+                          data-required="true"
+                          required
+                        />
+
+                      </div>
+
+                    </div>
+
+
+                    <label class="entry__error entry__error--primary"></label>
+
+
+                    <label class="entry__specification">
+                      Örneğin: adiniz@mail.com
+                    </label>
+
+                  </div>
+
+                </div>
+
+
+                <div class="sib-form-block">
+
+                  <button
+                    class="sib-form-block__button sib-form-block__button-with-loader"
+                    form="sib-form"
+                    type="submit">
+
+                    <svg
+                      class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon"
+                      viewBox="0 0 512 512">
+
+                      <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
+
+                    </svg>
+
+                    ABONE OL
+
+                  </button>
+
+                </div>
+
+
+                <input
+                  type="text"
+                  name="email_address_check"
+                  value=""
+                  class="input--hidden"
+                >
+
+                <input
+                  type="hidden"
+                  name="locale"
+                  value="tr"
+                >
+
+              </form>
+
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
 
     </section>
 
 
-    <!-- CONTACT -->
+    <!-- İLETİŞİM -->
 
-    <section class="section contact" id="iletisim">
+    <section class="contact" id="iletisim">
 
-      <div class="section-eyebrow">
+      <div class="section-label">
         İLETİŞİM
       </div>
 
-      <h2>
+      <h2 class="section-title">
         Bize yaz.
       </h2>
 
-      <p>
-        DEJAVU hakkında bizimle iletişime geçmek için
-        e-posta gönderebilirsin.
+      <p class="section-text">
+        Önerilerin, fikirlerin, iş birliklerin ya da sadece merhaba demek
+        istediğin bir şey varsa bize ulaşabilirsin.
       </p>
+
+      <a
+        class="contact-mail"
+        href="mailto:dejavudergi@gmail.com">
+        dejavudergi@gmail.com
+      </a>
 
     </section>
 
   </main>
 
 
+  <!-- FOOTER -->
+
   <footer>
-    © 2026 DEJAVU
+
+    <div class="footer-logo">
+      DEJAVU
+    </div>
+
+    <p>
+      © 2026 DEJAVU · Tüm hakları saklıdır.
+    </p>
+
+    <p>
+      İstanbul
+    </p>
+
   </footer>
+
+
+  <!-- MENU SCRIPT -->
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("navLinks").classList.toggle("active");
+    }
+
+    document.querySelectorAll(".nav-links a").forEach(function(link) {
+      link.addEventListener("click", function() {
+        document.getElementById("navLinks").classList.remove("active");
+      });
+    });
+  </script>
+
+
+  <!-- BREVO SCRIPT -->
+
+  <script>
+    window.REQUIRED_CODE_ERROR_MESSAGE = 'Lütfen ülke kodunu seçiniz.';
+    window.LOCALE = 'tr';
+
+    window.EMAIL_INVALID_MESSAGE =
+      "Girdiğiniz e-posta adresi geçerli görünmüyor.";
+
+    window.SMS_INVALID_MESSAGE =
+      "Girdiğiniz bilgi geçerli görünmüyor.";
+
+    window.REQUIRED_ERROR_MESSAGE =
+      "Bu alan boş bırakılamaz.";
+
+    window.GENERIC_INVALID_MESSAGE =
+      "Girdiğiniz bilgi geçerli görünmüyor.";
+
+    window.INVALID_NUMBER =
+      "Girdiğiniz numara geçerli görünmüyor.";
+
+    window.INVALID_DATE =
+      "Lütfen geçerli bir tarih giriniz.";
+
+    window.REQUIRED_MULTISELECT_MESSAGE =
+      "Lütfen en az bir seçenek seçiniz.";
+
+    window.translation = {
+      common: {
+        selectedList: '{quantity} liste seçildi',
+        selectedLists: '{quantity} liste seçildi',
+        selectedOption: '{quantity} seçildi',
+        selectedOptions: '{quantity} seçildi'
+      }
+    };
+
+    var AUTOHIDE = Boolean(0);
+  </script>
+
+  <script
+    defer
+    src="https://sibforms.com/forms/end-form/build/main.js">
+  </script>
 
 </body>
 </html>
-      
