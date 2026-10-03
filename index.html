@@ -2,17 +2,13 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>DEJAVU — 02 Ekim</title>
 
   <meta
     name="description"
-    content="DEJAVU. Yeni sayımızla buradayız."
+    content="DEJAVU. Ekim sayımızla buradayız."
   >
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,26 +20,17 @@
   >
 
   <style>
-
     :root {
       --cream: #f8eee9;
       --cream-2: #fff8f5;
-
       --pink: #eaa2b1;
       --pink-strong: #d96f88;
-
       --coral: #ee9a83;
       --lavender: #b9a5d8;
-
       --wine: #482634;
       --dark: #292329;
-
-      --line: rgba(72, 38, 52, .10);
-
-      --shadow:
-        0 25px 70px rgba(72, 38, 52, .14);
+      --white: #ffffff;
     }
-
 
     * {
       box-sizing: border-box;
@@ -51,988 +38,513 @@
       padding: 0;
     }
 
-
     html {
       scroll-behavior: smooth;
     }
 
-
     body {
       font-family: "DM Sans", sans-serif;
-
+      background: var(--cream);
       color: var(--dark);
-
-      background:
-        radial-gradient(
-          circle at 10% 10%,
-          rgba(234, 162, 177, .55),
-          transparent 28%
-        ),
-
-        radial-gradient(
-          circle at 90% 20%,
-          rgba(185, 165, 216, .38),
-          transparent 28%
-        ),
-
-        radial-gradient(
-          circle at 50% 100%,
-          rgba(238, 154, 131, .30),
-          transparent 30%
-        ),
-
-        var(--cream);
-
-      min-height: 100vh;
-
       overflow-x: hidden;
     }
 
-
-    /* SOFT HAREKETLİ ARKA PLAN */
-
-    body::before {
-      content: "";
-
-      position: fixed;
-
-      width: 420px;
-      height: 420px;
-
-      left: -180px;
-      top: 25%;
-
-      border-radius: 50%;
-
-      background: var(--pink);
-
-      filter: blur(110px);
-
-      opacity: .23;
-
-      z-index: -2;
-
-      animation:
-        floatingBlob 14s ease-in-out infinite alternate;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
+    /* SOFT BACKGROUND */
 
+    body::before,
     body::after {
       content: "";
-
       position: fixed;
-
-      width: 450px;
-      height: 450px;
-
-      right: -200px;
-      bottom: 5%;
-
+      width: 420px;
+      height: 420px;
       border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.22;
+      pointer-events: none;
+      z-index: -1;
+    }
 
+    body::before {
+      top: -160px;
+      left: -120px;
+      background: var(--pink);
+    }
+
+    body::after {
+      right: -150px;
+      top: 40%;
       background: var(--lavender);
-
-      filter: blur(120px);
-
-      opacity: .20;
-
-      z-index: -2;
-
-      animation:
-        floatingBlob2 18s ease-in-out infinite alternate;
     }
 
-
-    @keyframes floatingBlob {
-
-      from {
-        transform: translate(0, 0) scale(1);
-      }
-
-      to {
-        transform: translate(100px, -70px) scale(1.15);
-      }
-
-    }
-
-
-    @keyframes floatingBlob2 {
-
-      from {
-        transform: translate(0, 0) scale(1);
-      }
-
-      to {
-        transform: translate(-100px, 50px) scale(1.12);
-      }
-
-    }
-
-
-    /* NAVBAR */
+    /* NAV */
 
     header {
-
       position: sticky;
-
       top: 0;
-
-      z-index: 50;
-
-      background:
-        rgba(248, 238, 233, .78);
-
-      backdrop-filter:
-        blur(20px);
-
-      -webkit-backdrop-filter:
-        blur(20px);
-
-      border-bottom:
-        1px solid var(--line);
+      z-index: 100;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: rgba(248, 238, 233, 0.82);
+      border-bottom: 1px solid rgba(72, 38, 52, 0.08);
     }
 
-
-    .navbar {
-
-      max-width: 1250px;
-
-      height: 86px;
-
+    .nav {
+      width: min(1180px, calc(100% - 40px));
+      min-height: 78px;
       margin: auto;
-
-      padding:
-        0 30px;
-
       display: flex;
-
       align-items: center;
-
       justify-content: space-between;
+      gap: 30px;
     }
-
 
     .logo {
-
-      width: 125px;
-
-      height: 60px;
-
-      object-fit: contain;
-
-      mix-blend-mode: multiply;
+      width: 115px;
+      display: block;
+      flex-shrink: 0;
     }
 
+    .logo img {
+      width: 100%;
+      display: block;
+    }
 
-    nav {
-
+    .nav-links {
       display: flex;
-
       align-items: center;
-
-      gap: 32px;
+      gap: 28px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
     }
 
-
-    nav a {
-
-      text-decoration: none;
-
-      color: var(--wine);
-
-      font-size: 12px;
-
-      letter-spacing: .07em;
-
-      transition: .3s;
+    .nav-links a {
+      position: relative;
+      transition: color 0.25s ease;
     }
 
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -7px;
+      width: 0;
+      height: 1px;
+      background: var(--pink-strong);
+      transition: width 0.25s ease;
+    }
 
-    nav a:hover {
-
+    .nav-links a:hover {
       color: var(--pink-strong);
-
     }
 
-
-    .mobile-menu {
-
-      display: none;
-
-      border: none;
-
-      background: transparent;
-
-      font-size: 26px;
-
-      color: var(--wine);
-
-      cursor: pointer;
+    .nav-links a:hover::after {
+      width: 100%;
     }
-
 
     /* HERO */
 
     .hero {
-
-      max-width: 1250px;
-
-      min-height:
-        calc(100vh - 86px);
-
+      width: min(1180px, calc(100% - 40px));
+      min-height: calc(100vh - 78px);
       margin: auto;
-
-      padding:
-        80px 30px 110px;
+      padding: 80px 0 90px;
 
       display: grid;
-
-      grid-template-columns:
-        1fr 1fr;
-
+      grid-template-columns: 1.05fr 0.95fr;
       align-items: center;
-
       gap: 80px;
     }
 
-
     .eyebrow {
-
-      color: var(--pink-strong);
-
       font-size: 11px;
-
       font-weight: 600;
-
-      letter-spacing: .28em;
-
-      margin-bottom: 26px;
+      letter-spacing: 0.18em;
+      color: var(--pink-strong);
+      margin-bottom: 22px;
     }
-
 
     .hero h1 {
-
-      font-family:
-        "Cormorant Garamond",
-        serif;
-
-      font-size:
-        clamp(70px, 9vw, 125px);
-
-      line-height: .77;
-
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(70px, 9vw, 125px);
       font-weight: 500;
-
+      line-height: 0.82;
       color: var(--wine);
-
-      margin-bottom: 38px;
+      margin-bottom: 35px;
     }
-
 
     .hero h1 span {
-
       display: block;
-
-      margin-left: 75px;
-
-      color: var(--pink-strong);
-
       font-style: italic;
-
     }
 
-
-    .intro {
-
-      max-width: 450px;
-
-      font-family:
-        "Cormorant Garamond",
-        serif;
-
-      font-size: 25px;
-
-      line-height: 1.45;
-
-      color: #674b57;
-
-      margin-bottom: 38px;
+    .hero-text {
+      max-width: 500px;
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(41, 35, 41, 0.72);
+      margin-bottom: 32px;
     }
-
 
     .primary-button {
-
       display: inline-flex;
-
       align-items: center;
-
-      gap: 15px;
-
-      padding:
-        16px 25px;
-
-      border-radius: 100px;
-
+      justify-content: center;
+      padding: 14px 24px;
+      border-radius: 999px;
       background: var(--wine);
-
       color: white;
-
-      text-decoration: none;
-
-      font-size: 12px;
-
-      letter-spacing: .05em;
-
-      transition: .35s;
-
-      box-shadow:
-        0 12px 30px rgba(72, 38, 52, .15);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      transition:
+        background 0.25s ease,
+        transform 0.25s ease;
     }
-
 
     .primary-button:hover {
-
-      background:
-        var(--pink-strong);
-
-      transform:
-        translateY(-4px);
-
+      background: var(--pink-strong);
+      transform: translateY(-2px);
     }
 
-
-    /* KAPAK */
-
-    .cover-container {
-
-      display: flex;
-
-      justify-content: center;
-
+    .hero-cover {
       position: relative;
     }
 
-
-    .cover-container::before {
-
+    .hero-cover::before {
       content: "";
-
       position: absolute;
-
-      width: 370px;
-
-      height: 500px;
-
+      width: 75%;
+      height: 75%;
+      right: -10%;
+      bottom: -10%;
+      background: var(--coral);
+      opacity: 0.25;
+      filter: blur(55px);
       border-radius: 50%;
-
-      background:
-        linear-gradient(
-          140deg,
-          rgba(234,162,177,.7),
-          rgba(238,154,131,.4),
-          rgba(185,165,216,.6)
-        );
-
-      filter: blur(35px);
-
-      transform:
-        rotate(-8deg);
+      z-index: -1;
     }
 
-
-    .cover {
-
-      position: relative;
-
-      z-index: 2;
-
-      width:
-        min(390px, 80vw);
-
-      aspect-ratio:
-        3 / 4;
-
-      background:
-        #eadbd4;
-
-      box-shadow:
-        var(--shadow);
-
-      transform:
-        rotate(3deg);
-
-      transition:
-        .6s;
-
-      overflow: hidden;
-    }
-
-
-    .cover:hover {
-
-      transform:
-        rotate(0deg)
-        translateY(-8px);
-    }
-
-
-    .cover img {
-
+    .hero-cover img {
       width: 100%;
-
-      height: 100%;
-
-      object-fit: cover;
+      max-width: 480px;
+      display: block;
+      margin: auto;
+      border-radius: 26px;
+      box-shadow: 0 35px 70px rgba(72, 38, 52, 0.18);
+      transform: rotate(1.2deg);
+      transition: transform 0.4s ease;
     }
 
+    .hero-cover img:hover {
+      transform: rotate(0deg) translateY(-5px);
+    }
 
-    /* MERHABA */
+    /* WELCOME */
+
+    .section {
+      width: min(1080px, calc(100% - 40px));
+      margin: auto;
+    }
 
     .welcome {
-
-      max-width: 1050px;
-
-      margin: auto;
-
-      padding:
-        120px 30px;
-
+      padding: 120px 0;
       text-align: center;
     }
 
-
-    .welcome-label {
-
-      font-size: 11px;
-
-      letter-spacing: .25em;
-
+    .section-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
       color: var(--pink-strong);
-
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
-
     .welcome h2 {
-
-      font-family:
-        "Cormorant Garamond",
-        serif;
-
-      font-size:
-        clamp(52px, 7vw, 90px);
-
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(45px, 6vw, 70px);
       font-weight: 500;
-
-      line-height: .9;
-
       color: var(--wine);
+      margin-bottom: 22px;
+    }
 
+    .welcome p {
+      max-width: 650px;
+      margin: auto;
+      font-size: 15px;
+      line-height: 1.9;
+      color: rgba(41, 35, 41, 0.68);
+    }
+
+    /* ISSUE */
+
+    .issue-section {
+      padding: 40px 0 130px;
+    }
+
+    .issue-box {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      align-items: center;
+      gap: 75px;
+
+      padding: 60px;
+      border-radius: 34px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,0.65),
+          rgba(234,162,177,0.18)
+        );
+
+      border: 1px solid rgba(72, 38, 52, 0.07);
+      box-shadow: 0 25px 70px rgba(72, 38, 52, 0.08);
+    }
+
+    .issue-cover img {
+      width: 100%;
+      max-width: 340px;
+      display: block;
+      margin: auto;
+      border-radius: 18px;
+      box-shadow: 0 25px 50px rgba(72, 38, 52, 0.16);
+    }
+
+    .issue-number {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--pink-strong);
+      margin-bottom: 12px;
+    }
+
+    .issue-content h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(52px, 7vw, 82px);
+      font-weight: 500;
+      color: var(--wine);
+      line-height: 0.9;
       margin-bottom: 25px;
     }
 
-
-    .welcome p {
-
-      max-width: 570px;
-
-      margin: auto;
-
-      color: #725a65;
-
+    .issue-content p {
+      max-width: 500px;
       font-size: 14px;
-
       line-height: 1.8;
+      color: rgba(41, 35, 41, 0.68);
+      margin-bottom: 25px;
     }
 
-
-    /* YENİ SAYI */
-
-    .issue-section {
-
-      max-width: 1200px;
-
-      margin: auto;
-
-      padding:
-        80px 30px 130px;
+    .reading-note {
+      font-size: 11px !important;
+      opacity: 0.65;
+      margin-top: -8px;
     }
 
+    /* ABOUT */
 
-    .section-top {
-
-      display: flex;
-
-      align-items: end;
-
-      justify-content: space-between;
-
-      margin-bottom: 45px;
-    }
-
-
-    .section-top h2 {
-
-      font-family:
-        "Cormorant Garamond",
-        serif;
-
-      font-size:
-        clamp(48px, 6vw, 76px);
-
-      font-weight: 500;
-
-      color: var(--wine);
-
-      line-height: .9;
-    }
-
-
-    .section-top p {
-
-      max-width: 330px;
-
-      font-size: 13px;
-
-      line-height: 1.7;
-
-      color: #765d67;
-    }
-
-
-    .issue-card {
-
-      display: grid;
-
-      grid-template-columns:
-        340px 1fr;
-
-      gap: 70px;
-
-      align-items: center;
-
-      padding:
-        45px;
-
-      border:
-        1px solid var(--line);
-
-      background:
-        rgba(255, 250, 248, .52);
-
-      backdrop-filter:
-        blur(15px);
-
-      box-shadow:
-        0 25px 70px rgba(72,38,52,.08);
-    }
-
-
-    .issue-cover {
-
-      width: 100%;
-
-      aspect-ratio:
-        3 / 4;
-
-      overflow: hidden;
-
-      box-shadow:
-        0 25px 50px rgba(72,38,52,.15);
-    }
-
-
-    .issue-cover img {
-
-      width: 100%;
-
-      height: 100%;
-
-      object-fit: cover;
-    }
-
-
-    .issue-info small {
-
-      color:
-        var(--pink-strong);
-
-      font-size: 11px;
-
-      letter-spacing: .2em;
-
-      font-weight: 600;
-    }
-
-
-    .issue-info h3 {
-
-      font-family:
-        "Cormorant Garamond",
-        serif;
-
-      font-size:
-        clamp(55px, 7vw, 100px);
-
-      line-height: .85;
-
-      font-weight: 500;
-
-      color: var(--wine);
-
-      margin:
-        18px 0 30px;
-    }
-
-
-    .issue-info p {
-
-      max-width: 440px;
-
-      color: #705865;
-
-      font-size: 14px;
-
-      line-height: 1.8;
-
-      margin-bottom: 30px;
-    }
-
-
-    /* ALT CTA */
-
-    .closing {
-
-      max-width: 1050px;
-
-      margin:
-        0 auto 120px;
-
-      padding:
-        80px 30px;
-
-      border-radius: 30px;
-
+    .about {
+      padding: 100px 0 130px;
       text-align: center;
+    }
 
+    .about h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(45px, 6vw, 70px);
+      font-weight: 500;
+      color: var(--wine);
+      margin-bottom: 20px;
+    }
+
+    .about p {
+      max-width: 650px;
+      margin: auto;
+      font-size: 15px;
+      line-height: 1.9;
+      color: rgba(41, 35, 41, 0.68);
+    }
+
+    /* NEWSLETTER */
+
+    .newsletter {
+      margin-bottom: 120px;
+      padding: 65px 50px;
+      border-radius: 34px;
       background:
         linear-gradient(
-          130deg,
-          rgba(234,162,177,.55),
-          rgba(238,154,131,.35),
-          rgba(185,165,216,.50)
+          135deg,
+          rgba(255,255,255,0.68),
+          rgba(234,162,177,0.20)
         );
+      border: 1px solid rgba(72, 38, 52, 0.07);
+      text-align: center;
+      box-shadow: 0 25px 70px rgba(72, 38, 52, 0.07);
     }
 
-
-    .closing h2 {
-
-      font-family:
-        "Cormorant Garamond",
-        serif;
-
-      color: var(--wine);
-
-      font-size:
-        clamp(45px, 6vw, 70px);
-
+    .newsletter h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(45px, 6vw, 68px);
       font-weight: 500;
-
+      color: var(--wine);
       margin-bottom: 15px;
     }
 
-
-    .closing p {
-
-      max-width: 500px;
-
-      margin:
-        auto auto 28px;
-
-      color: #684e59;
-
+    .newsletter p {
+      max-width: 540px;
+      margin: 0 auto 25px;
       font-size: 14px;
-
-      line-height: 1.7;
+      line-height: 1.8;
+      color: rgba(41, 35, 41, 0.68);
     }
 
+    .newsletter-placeholder {
+      max-width: 600px;
+      margin: auto;
+      padding: 24px;
+      font-size: 12px;
+      color: rgba(41, 35, 41, 0.55);
+    }
+
+    /* CONTACT */
+
+    .contact {
+      padding: 30px 0 110px;
+      text-align: center;
+    }
+
+    .contact h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(45px, 6vw, 68px);
+      font-weight: 500;
+      color: var(--wine);
+      margin-bottom: 20px;
+    }
+
+    .contact p {
+      font-size: 14px;
+      line-height: 1.8;
+      color: rgba(41, 35, 41, 0.68);
+    }
 
     /* FOOTER */
 
     footer {
-
-      border-top:
-        1px solid var(--line);
-
-      padding:
-        40px 30px;
-    }
-
-
-    .footer-inner {
-
-      max-width: 1200px;
-
-      margin: auto;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-between;
-    }
-
-
-    .footer-logo {
-
-      width: 105px;
-    }
-
-
-    footer p {
-
-      color: #806a73;
-
+      padding: 40px 20px;
+      text-align: center;
+      border-top: 1px solid rgba(72, 38, 52, 0.08);
       font-size: 11px;
+      letter-spacing: 0.08em;
+      color: rgba(41, 35, 41, 0.55);
     }
-
 
     /* MOBILE */
 
-    @media(max-width: 850px) {
+    @media (max-width: 850px) {
 
-      .navbar {
-
-        height: 72px;
+      .nav {
+        min-height: 70px;
       }
 
-
-      .mobile-menu {
-
-        display: block;
+      .nav-links {
+        gap: 14px;
+        font-size: 9px;
       }
-
-
-      nav {
-
-        display: none;
-
-        position: absolute;
-
-        left: 0;
-
-        top: 72px;
-
-        width: 100%;
-
-        padding: 25px;
-
-        flex-direction: column;
-
-        gap: 22px;
-
-        background:
-          rgba(248,238,233,.97);
-
-        border-bottom:
-          1px solid var(--line);
-      }
-
-
-      nav.active {
-
-        display: flex;
-      }
-
 
       .hero {
-
         grid-template-columns: 1fr;
-
-        text-align: center;
-
+        gap: 55px;
         padding-top: 65px;
-
-        gap: 70px;
       }
 
-
-      .hero h1 span {
-
-        margin-left: 0;
+      .hero-content {
+        text-align: center;
       }
 
-
-      .intro {
-
+      .hero-text {
         margin-left: auto;
-
         margin-right: auto;
       }
 
-
-      .section-top {
-
-        display: block;
-      }
-
-
-      .section-top p {
-
-        margin-top: 20px;
-      }
-
-
-      .issue-card {
-
-        grid-template-columns: 1fr;
-
-        padding: 25px;
-
-        gap: 45px;
-      }
-
-
-      .issue-cover {
-
-        max-width: 360px;
-
+      .hero-cover {
+        max-width: 500px;
         margin: auto;
       }
 
+      .issue-box {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        padding: 40px 28px;
+      }
 
-      .issue-info {
-
+      .issue-content {
         text-align: center;
       }
 
-
-      .issue-info p {
-
+      .issue-content p {
         margin-left: auto;
-
         margin-right: auto;
       }
-
-
-      .footer-inner {
-
-        flex-direction: column;
-
-        gap: 20px;
-
-        text-align: center;
-      }
-
     }
 
+    @media (max-width: 500px) {
 
-    @media(max-width: 500px) {
-
-      .navbar {
-
-        padding:
-          0 20px;
+      .nav {
+        width: calc(100% - 28px);
       }
 
+      .logo {
+        width: 92px;
+      }
+
+      .nav-links {
+        gap: 9px;
+        font-size: 7.5px;
+      }
+
+      .hero,
+      .section {
+        width: calc(100% - 28px);
+      }
 
       .hero {
-
-        padding-left: 20px;
-
-        padding-right: 20px;
+        min-height: auto;
+        padding: 70px 0 80px;
       }
 
-
-      .cover {
-
-        width: 82vw;
+      .newsletter {
+        padding: 45px 20px;
       }
-
-
-      .welcome {
-
-        padding:
-          90px 20px;
-      }
-
-
-      .issue-section {
-
-        padding:
-          60px 20px 100px;
-      }
-
-
-      .closing {
-
-        margin-left: 20px;
-
-        margin-right: 20px;
-
-        padding:
-          60px 20px;
-      }
-
     }
-
   </style>
 </head>
 
-
 <body>
 
-
-  <!-- NAVBAR -->
+  <!-- NAV -->
 
   <header>
+    <nav class="nav">
 
-    <div class="navbar">
-
-      <a href="index.html">
-
-        <img
-          src="logo.jpg"
-          alt="DEJAVU"
-          class="logo"
-        >
-
+      <a href="index.html" class="logo">
+        <img src="logo.jpg" alt="DEJAVU">
       </a>
 
+      <div class="nav-links">
+        <a href="index.html">ANA SAYFA</a>
+        <a href="#dergi">DERGİ</a>
+        <a href="arsiv.html">ARŞİV</a>
+        <a href="#hakkimizda">HAKKIMIZDA</a>
+        <a href="#iletisim">İLETİŞİM</a>
+      </div>
 
-      <button
-        class="mobile-menu"
-        onclick="toggleMenu()"
-        aria-label="Menüyü aç"
-      >
-        ☰
-      </button>
-
-
-      <nav id="nav">
-
-        <a href="index.html">
-          ANA SAYFA
-        </a>
-
-        <a href="#dergi">
-          DERGİ
-        </a>
-
-        <a href="#hakkimizda">
-          HAKKIMIZDA
-        </a>
-
-        <a href="#iletisim">
-          İLETİŞİM
-        </a>
-
-      </nav>
-
-    </div>
-
+    </nav>
   </header>
-
 
 
   <!-- HERO -->
@@ -1041,254 +553,204 @@
 
     <section class="hero">
 
-
-      <div>
+      <div class="hero-content">
 
         <div class="eyebrow">
-          DEJAVU · 01 EYLÜL
+          DEJAVU · 02 EKİM
         </div>
-
 
         <h1>
           Merhaba.
           <span>Biz DEJAVU.</span>
         </h1>
 
-
-        <p class="intro">
-
-          İlk sayımızla buradayız.
-          Birlikte bakmak, okumak ve
-          keşfetmek için küçük bir alan.
-
+        <p class="hero-text">
+          İkinci sayımızla buradayız.
+          Birlikte bakmak, okumak ve keşfetmek için
+          küçük bir alan.
         </p>
 
-
         <a
-          href="reader.html?pdf=dergi/01-eylul.pdf"
+          href="reader.html?pdf=dergi/02-ekim.pdf"
           class="primary-button"
         >
-
-          DERGİYİ OKU
-
-          <span>→</span>
-
+          02 EKİM'İ OKU
         </a>
 
       </div>
 
 
+      <div class="hero-cover">
 
-      <div class="cover-container">
-
-        <div class="cover">
-
-          <img
-            src="images/01-eylul-kapak.jpg"
-            alt="DEJAVU 01 Eylül kapak"
-          >
-
-        </div>
+        <img
+          src="images/02-ekim-kapak.jpg"
+          alt="DEJAVU 02 Ekim 2026 kapak"
+        >
 
       </div>
-
 
     </section>
 
 
+    <!-- WELCOME -->
 
-    <!-- MERHABA -->
+    <section class="section welcome" id="hakkimizda">
 
-    <section
-      class="welcome"
-      id="hakkimizda"
-    >
-
-      <div class="welcome-label">
+      <div class="section-eyebrow">
         MERHABA
       </div>
 
-
       <h2>
-        İlk sayımız.<br>
-        İlk merhabamız.
+        Yeni bir sayı.
+        Yeni bir merhaba.
       </h2>
 
-
       <p>
-
-        DEJAVU, farklı bakışların,
-        hikâyelerin ve fikirlerin
+        DEJAVU, farklı bakışların, hikâyelerin ve fikirlerin
         aynı yerde buluştuğu bir yayın alanı.
-
-        İlk sayımızla birlikte
-        bu yolculuğun ilk sayfasını açıyoruz.
-
+        Ekim sayımızla birlikte bu yolculuğun
+        ikinci sayfasını açıyoruz.
       </p>
 
     </section>
 
 
+    <!-- ISSUE -->
 
-    <!-- DERGİ -->
+    <section class="section issue-section" id="dergi">
 
-    <section
-      class="issue-section"
-      id="dergi"
-    >
-
-      <div class="section-top">
-
-        <h2>
-          İlk<br>
-          Sayımız
-        </h2>
-
-
-        <p>
-
-          Eylül ayında başlayan
-          DEJAVU yolculuğunun
-          ilk sayısını şimdi okuyabilirsin.
-
-        </p>
-
-      </div>
-
-
-
-      <div class="issue-card">
-
+      <div class="issue-box">
 
         <div class="issue-cover">
 
           <img
-            src="images/01-eylul-kapak.jpg"
-            alt="DEJAVU 01 Eylül"
+            src="images/02-ekim-kapak.jpg"
+            alt="DEJAVU 02 Ekim 2026"
           >
 
         </div>
 
 
+        <div class="issue-content">
 
-        <div class="issue-info">
+          <div class="issue-number">
+            DEJAVU · SAYI 02
+          </div>
 
-          <small>
-            DEJAVU · SAYI 01
-          </small>
-
-
-          <h3>
-            01<br>
-            EYLÜL
-          </h3>
-
+          <h2>
+            02<br>
+            EKİM
+          </h2>
 
           <p>
-
-            İlk sayımızı masaüstünde
-            yan yana veya telefonunda
-            aşağı doğru akan şerit görünümünde
-            okuyabilirsin.
-
+            Ekim sayımız şimdi yayında.
+            Dergiyi doğrudan tarayıcından okuyabilir,
+            sayfalar arasında geçebilir ve
+            istediğin yerde okumaya devam edebilirsin.
           </p>
 
+          <p class="reading-note">
+            Yan yana veya şerit görünümünü seçebilirsin.
+          </p>
 
           <a
-            href="reader.html?pdf=dergi/01-eylul.pdf"
+            href="reader.html?pdf=dergi/02-ekim.pdf"
             class="primary-button"
           >
-
-            OKUMAYA BAŞLA
-
-            <span>→</span>
-
+            DERGİYİ OKU
           </a>
 
         </div>
-
 
       </div>
 
     </section>
 
 
+    <!-- ABOUT -->
 
-    <!-- KAPANIŞ -->
+    <section class="section about">
 
-    <section
-      class="closing"
-      id="iletisim"
-    >
+      <div class="section-eyebrow">
+        DEJAVU
+      </div>
 
       <h2>
-        Burada olduğun için
-        teşekkürler.
+        Biraz bizden.
       </h2>
 
-
       <p>
-
-        DEJAVU'nun ilk sayfasını
-        birlikte açtık.
-
+        DEJAVU; moda, kültür, güzellik, ilişkiler,
+        şehir hayatı, popüler kültür ve kadınların
+        gündelik dünyasından ilham alan bağımsız
+        bir dijital dergi.
+        <br><br>
+        Bazen ciddi, bazen eğlenceli,
+        bazen de sadece güzel şeylere bakmak için.
       </p>
-
-
-      <a
-        href="reader.html?pdf=dergi/01-eylul.pdf"
-        class="primary-button"
-      >
-
-        01 EYLÜL'Ü OKU
-
-        <span>→</span>
-
-      </a>
 
     </section>
 
 
+    <!-- NEWSLETTER -->
+
+    <section class="section newsletter" id="bulten">
+
+      <div class="section-eyebrow">
+        POSTA KUTUNA DEJAVU
+      </div>
+
+      <h2>
+        Yeni sayıyı kaçırma.
+      </h2>
+
+      <p>
+        Yeni DEJAVU yayımlandığında sana haber verelim.
+        Arşivi okumak için kayıt olman gerekmez;
+        e-posta aboneliği tamamen isteğe bağlıdır.
+      </p>
+
+      <!--
+        BREVO FORMU BURAYA GELECEK.
+
+        Brevo'dan alacağımız form kodunu
+        bu yorumların yerine koyacağız.
+      -->
+
+      <div class="newsletter-placeholder">
+        Newsletter formu yakında burada.
+      </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section class="section contact" id="iletisim">
+
+      <div class="section-eyebrow">
+        İLETİŞİM
+      </div>
+
+      <h2>
+        Bize yaz.
+      </h2>
+
+      <p>
+        DEJAVU hakkında bizimle iletişime geçmek için
+        e-posta gönderebilirsin.
+      </p>
+
+    </section>
+
   </main>
 
 
-
-  <!-- FOOTER -->
-
   <footer>
-
-    <div class="footer-inner">
-
-      <img
-        src="logo.jpg"
-        alt="DEJAVU"
-        class="footer-logo"
-      >
-
-
-      <p>
-        © 2026 DEJAVU
-      </p>
-
-    </div>
-
+    © 2026 DEJAVU
   </footer>
-
-
-
-  <script>
-
-    function toggleMenu() {
-
-      document
-        .getElementById("nav")
-        .classList
-        .toggle("active");
-
-    }
-
-  </script>
-
 
 </body>
 </html>
+    
+      
