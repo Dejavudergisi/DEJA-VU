@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html lang="tr">
-
 <head>
 
   <meta charset="UTF-8">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>DEJAVU — Dergi</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap"
     rel="stylesheet"
   >
 
   <style>
 
     :root {
-      --bg: #f2e6e1;
-      --panel: #fffaf7;
+      --cream: #f8eee9;
+      --cream-2: #fff8f5;
+      --pink: #eaa2b1;
+      --pink-strong: #d96f88;
+      --coral: #ee9a83;
+      --lavender: #b9a5d8;
       --wine: #482634;
-      --pink: #d96f88;
-      --soft-pink: #eaa2b1;
-      --line: rgba(72,38,52,.12);
+      --dark: #292329;
+      --white: #ffffff;
     }
 
     * {
@@ -35,676 +39,514 @@
       padding: 0;
     }
 
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+    }
+
     body {
       font-family: "DM Sans", sans-serif;
-
-      background:
-        radial-gradient(
-          circle at 10% 20%,
-          rgba(234,162,177,.30),
-          transparent 30%
-        ),
-
-        radial-gradient(
-          circle at 90% 80%,
-          rgba(185,165,216,.28),
-          transparent 30%
-        ),
-
-        var(--bg);
-
-      color: var(--wine);
-
-      min-height: 100vh;
-
+      background: var(--cream);
+      color: var(--dark);
       overflow-x: hidden;
     }
 
+    button {
+      font-family: inherit;
+    }
 
-    /* =========================
-       ÜST BAR
-    ========================= */
+    /* HEADER */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+
+      background: rgba(248, 238, 233, 0.92);
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      border-bottom: 1px solid rgba(72, 38, 52, 0.08);
+    }
 
     .reader-header {
-
-      position: sticky;
-
-      top: 0;
-
-      z-index: 100;
-
-      height: 72px;
-
-      padding: 0 25px;
+      width: min(1250px, calc(100% - 30px));
+      min-height: 70px;
+      margin: auto;
 
       display: flex;
-
       align-items: center;
-
       justify-content: space-between;
-
-      background: rgba(255,250,247,.88);
-
-      backdrop-filter: blur(20px);
-
-      border-bottom: 1px solid var(--line);
-
+      gap: 20px;
     }
 
-
-    .reader-brand {
-
+    .header-left {
       display: flex;
-
       align-items: center;
-
-      gap: 18px;
-
+      gap: 20px;
+      min-width: 0;
     }
 
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
 
-    .reader-logo {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
 
-      width: 95px;
+      color: var(--wine);
 
-      max-height: 45px;
-
-      object-fit: contain;
-
-      mix-blend-mode: multiply;
-
+      white-space: nowrap;
     }
 
+    .back-button:hover {
+      color: var(--pink-strong);
+    }
 
     .issue-name {
-
-      padding-left: 18px;
-
-      border-left: 1px solid var(--line);
-
       font-family: "Cormorant Garamond", serif;
-
-      font-size: 20px;
-
+      font-size: 27px;
+      font-weight: 600;
+      color: var(--wine);
+      white-space: nowrap;
     }
 
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
 
-    .reader-tools {
+    .control-button {
+      border: 1px solid rgba(72, 38, 52, 0.12);
+      background: rgba(255,255,255,0.5);
+
+      color: var(--wine);
+
+      width: 38px;
+      height: 38px;
+
+      border-radius: 50%;
 
       display: flex;
-
       align-items: center;
-
-      gap: 8px;
-
-    }
-
-
-    button {
-
-      font-family: "DM Sans", sans-serif;
+      justify-content: center;
 
       cursor: pointer;
 
+      font-size: 15px;
+
+      transition:
+        background 0.2s ease,
+        transform 0.2s ease;
     }
 
-
-    .tool-button {
-
-      border: 1px solid var(--line);
-
-      background: rgba(255,255,255,.65);
-
-      color: var(--wine);
-
-      padding: 9px 13px;
-
-      border-radius: 100px;
-
-      font-size: 11px;
-
-      transition: .25s;
-
+    .control-button:hover {
+      background: var(--pink);
+      transform: translateY(-1px);
     }
 
-
-    .tool-button:hover {
-
-      background: var(--soft-pink);
-
-    }
-
-
-    .tool-button.active {
-
+    .control-button.active {
       background: var(--wine);
-
       color: white;
-
-      border-color: var(--wine);
-
     }
 
-
-    /* =========================
-       NAVİGASYON
-    ========================= */
+    /* NAVIGATION */
 
     .page-navigation {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 20px;
 
-      height: 65px;
+      z-index: 900;
 
       display: flex;
-
-      align-items: center;
-
       justify-content: center;
+      align-items: center;
+      gap: 14px;
 
-      gap: 20px;
-
-      background: rgba(255,250,247,.60);
-
-      border-bottom: 1px solid var(--line);
-
+      pointer-events: none;
     }
 
+    .nav-arrow {
+      width: 45px;
+      height: 45px;
 
-    .arrow {
-
-      width: 40px;
-
-      height: 40px;
-
+      border: 1px solid rgba(72, 38, 52, 0.1);
       border-radius: 50%;
 
-      border: 1px solid var(--line);
-
-      background: white;
+      background: rgba(255,255,255,0.88);
 
       color: var(--wine);
+
+      cursor: pointer;
 
       font-size: 18px;
 
-      transition: .25s;
-
-    }
-
-
-    .arrow:hover {
-
-      background: var(--wine);
-
-      color: white;
-
-    }
-
-
-    #pageCounter {
-
-      min-width: 110px;
-
-      text-align: center;
-
-      font-size: 12px;
-
-      letter-spacing: .08em;
-
-    }
-
-
-    /* =========================
-       OKUMA ALANI
-    ========================= */
-
-    #viewer {
-
-      width: 100%;
-
-      min-height: calc(100vh - 137px);
-
-      padding: 45px 25px 100px;
-
-    }
-
-
-    /* =========================
-       YAN YANA
-    ========================= */
-
-    #viewer.spread {
-
       display: flex;
-
-      justify-content: center;
-
-      align-items: flex-start;
-
-      gap: 12px;
-
-    }
-
-
-    #viewer.spread .page {
-
-      width: min(44vw, 650px);
-
-    }
-
-
-    /* KAPAK TEK */
-
-    #viewer.spread.cover {
-
-      display: flex;
-
-      justify-content: center;
-
-      align-items: flex-start;
-
-    }
-
-
-    #viewer.spread.cover .page {
-
-      width: min(65vw, 650px);
-
-    }
-
-
-    /* =========================
-       ŞERİT
-    ========================= */
-
-    #viewer.strip {
-
-      display: flex;
-
-      flex-direction: column;
-
       align-items: center;
-
-      gap: 25px;
-
-    }
-
-
-    #viewer.strip .page {
-
-      width: min(850px, 95vw);
-
-      display: block !important;
-
-    }
-
-
-    /* =========================
-       SAYFA
-    ========================= */
-
-    .page {
-
-      position: relative;
-
-      background: white;
-
-      box-shadow: 0 20px 50px rgba(72,38,52,.13);
-
-    }
-
-
-    .page canvas {
-
-      display: block;
-
-      width: 100%;
-
-      height: auto;
-
-    }
-
-
-    /* =========================
-       LOADING
-    ========================= */
-
-    #loading {
-
-      position: fixed;
-
-      inset: 0;
-
-      z-index: 200;
-
-      display: flex;
-
-      align-items: center;
-
       justify-content: center;
 
-      flex-direction: column;
+      box-shadow: 0 8px 25px rgba(72, 38, 52, 0.1);
 
-      gap: 20px;
+      pointer-events: auto;
 
-      background: #f2e6e1;
-
-      transition: opacity .4s;
-
+      transition:
+        background 0.2s ease,
+        transform 0.2s ease;
     }
 
+    .nav-arrow:hover {
+      background: var(--pink);
+      transform: translateY(-2px);
+    }
 
-    .loading-logo {
+    .page-counter {
+      min-width: 90px;
 
-      font-family: "Cormorant Garamond", serif;
+      padding: 10px 15px;
 
-      font-size: 48px;
+      border-radius: 999px;
+
+      background: rgba(255,255,255,0.88);
 
       color: var(--wine);
 
-      font-style: italic;
+      font-size: 11px;
+      font-weight: 600;
 
+      text-align: center;
+
+      box-shadow: 0 8px 25px rgba(72, 38, 52, 0.1);
+
+      pointer-events: auto;
     }
 
+    /* VIEWER */
 
-    .loader {
+    #viewer {
+      width: 100%;
+      min-height: calc(100vh - 70px);
 
-      width: 45px;
+      padding: 35px 25px 100px;
 
-      height: 45px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
 
-      border: 2px solid rgba(72,38,52,.12);
-
-      border-top-color: var(--pink);
-
-      border-radius: 50%;
-
-      animation: spin .8s linear infinite;
-
+      gap: 25px;
     }
 
-
-    @keyframes spin {
-
-      to {
-        transform: rotate(360deg);
-      }
-
+    #viewer.spread {
+      flex-wrap: nowrap;
+      overflow-x: auto;
     }
 
+    #viewer.strip {
+      flex-direction: column;
+      align-items: center;
+    }
 
-    /* =========================
-       MOBİL
-    ========================= */
+    .page {
+      flex: 0 0 auto;
 
-    @media(max-width: 700px) {
+      background: white;
+
+      box-shadow:
+        0 15px 45px rgba(72, 38, 52, 0.14);
+
+      border-radius: 2px;
+
+      overflow: hidden;
+
+      transition: opacity 0.2s ease;
+    }
+
+    .page canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* SPREAD MODE */
+
+    #viewer.spread .page {
+      width: min(
+        calc((100vw - 100px) / 2),
+        550px
+      );
+    }
+
+    /* STRIP MODE */
+
+    #viewer.strip .page {
+      width: min(
+        calc(100vw - 50px),
+        850px
+      );
+
+      margin-bottom: 25px;
+    }
+
+    #viewer.spread .page:not(.visible) {
+      display: none;
+    }
+
+    /* LOADING */
+
+    .loading {
+      width: 100%;
+      min-height: 50vh;
+
+      display: flex;
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 15px;
+
+      color: var(--wine);
+
+      text-align: center;
+    }
+
+    .loading-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 32px;
+    }
+
+    .loading-text {
+      font-size: 12px;
+      opacity: 0.55;
+    }
+
+    .error {
+      width: min(600px, calc(100% - 40px));
+      margin: 100px auto;
+
+      padding: 35px;
+
+      background: rgba(255,255,255,0.7);
+
+      border: 1px solid rgba(72, 38, 52, 0.08);
+
+      border-radius: 25px;
+
+      text-align: center;
+
+      color: var(--wine);
+    }
+
+    .error h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 35px;
+      margin-bottom: 15px;
+    }
+
+    .error p {
+      font-size: 13px;
+      line-height: 1.7;
+      opacity: 0.7;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 700px) {
 
       .reader-header {
-
-        padding: 0 12px;
-
-        height: 64px;
-
+        min-height: 62px;
       }
 
-
-      .reader-logo {
-
-        width: 75px;
-
+      .back-button {
+        font-size: 8px;
       }
-
 
       .issue-name {
-
-        font-size: 16px;
-
-        padding-left: 10px;
-
+        font-size: 22px;
       }
 
-
-      .reader-tools {
-
+      .controls {
         gap: 4px;
-
       }
 
-
-      .tool-button {
-
-        padding: 8px 9px;
-
-        font-size: 9px;
-
+      .control-button {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
       }
-
-
-      .tool-button.zoom {
-
-        display: none;
-
-      }
-
-
-      .page-navigation {
-
-        height: 58px;
-
-      }
-
 
       #viewer {
-
-        padding: 20px 8px 70px;
-
+        padding: 20px 10px 90px;
       }
-
-
-      /* MOBİL YAN YANA */
-
-      #viewer.spread {
-
-        display: flex;
-
-        justify-content: center;
-
-        align-items: flex-start;
-
-        gap: 4px;
-
-      }
-
 
       #viewer.spread .page {
+        width: calc(100vw - 35px);
+      }
 
+      #viewer.spread {
+        overflow-x: hidden;
+      }
+
+      #viewer.spread .page:not(.visible) {
         display: none;
-
-        width: calc(50% - 2px);
-
-        margin: 0;
-
       }
-
-
-      #viewer.spread .page.visible {
-
-        display: block;
-
-      }
-
-
-      /* MOBİL KAPAK */
-
-      #viewer.spread.cover .page {
-
-        width: 100%;
-
-        max-width: 650px;
-
-        margin: 0 auto;
-
-      }
-
-
-      /* MOBİL ŞERİT */
-
-      #viewer.strip {
-
-        display: flex !important;
-
-        flex-direction: column !important;
-
-        align-items: center !important;
-
-        gap: 20px !important;
-
-      }
-
 
       #viewer.strip .page {
-
-        display: block !important;
-
-        width: 100% !important;
-
-        max-width: 850px;
-
-        margin: 0 auto;
-
+        width: calc(100vw - 25px);
       }
 
+      .page-navigation {
+        bottom: 12px;
+      }
+
+      .nav-arrow {
+        width: 40px;
+        height: 40px;
+      }
+
+      .page-counter {
+        min-width: 75px;
+        font-size: 10px;
+      }
     }
 
-
   </style>
-
 </head>
-
 
 <body>
 
 
-  <!-- =========================
-       LOADING
-  ========================= -->
+  <!-- HEADER -->
 
-  <div id="loading">
+  <header>
 
-    <div class="loading-logo">
-      DEJAVU
-    </div>
+    <div class="reader-header">
 
-    <div class="loader"></div>
+      <div class="header-left">
 
-    <div style="
-      font-size:11px;
-      letter-spacing:.12em;
-      color:#765d67;
-    ">
-      DERGİ HAZIRLANIYOR
-    </div>
-
-  </div>
-
-
-  <!-- =========================
-       HEADER
-  ========================= -->
-
-  <header class="reader-header">
-
-    <div class="reader-brand">
-
-      <a href="index.html">
-
-        <img
-          src="logo.jpg"
-          class="reader-logo"
-          alt="DEJAVU"
+        <a
+          href="index.html"
+          class="back-button"
         >
+          ← DEJAVU
+        </a>
 
-      </a>
+        <div
+          class="issue-name"
+          id="issueName"
+        >
+          DEJAVU
+        </div>
 
-
-      <div class="issue-name">
-        01 EYLÜL
       </div>
 
-    </div>
 
+      <div class="controls">
 
-    <div class="reader-tools">
+        <button
+          class="control-button active"
+          id="spreadButton"
+          title="Yan yana"
+          type="button"
+        >
+          ▯▯
+        </button>
 
+        <button
+          class="control-button"
+          id="stripButton"
+          title="Şerit"
+          type="button"
+        >
+          ☰
+        </button>
 
-      <button
-        class="tool-button active"
-        id="spreadButton"
-        onclick="setMode('spread')"
-      >
-        YAN YANA
-      </button>
+        <button
+          class="control-button"
+          id="zoomOut"
+          title="Uzaklaştır"
+          type="button"
+        >
+          −
+        </button>
 
+        <button
+          class="control-button"
+          id="zoomIn"
+          title="Yakınlaştır"
+          type="button"
+        >
+          +
+        </button>
 
-      <button
-        class="tool-button"
-        id="stripButton"
-        onclick="setMode('strip')"
-      >
-        ŞERİT
-      </button>
+        <button
+          class="control-button"
+          id="fullscreen"
+          title="Tam ekran"
+          type="button"
+        >
+          ⛶
+        </button>
 
-
-      <button
-        class="tool-button zoom"
-        onclick="zoomOut()"
-      >
-        −
-      </button>
-
-
-      <button
-        class="tool-button zoom"
-        onclick="zoomIn()"
-      >
-        +
-      </button>
-
-
-      <button
-        class="tool-button"
-        onclick="fullScreen()"
-      >
-        ⛶
-      </button>
-
+      </div>
 
     </div>
 
   </header>
 
 
-  <!-- =========================
-       NAVİGASYON
-  ========================= -->
+  <!-- VIEWER -->
+
+  <main
+    id="viewer"
+    class="spread"
+  >
+
+    <div class="loading">
+
+      <div class="loading-title">
+        DEJAVU
+      </div>
+
+      <div class="loading-text">
+        Dergi yükleniyor...
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- NAVIGATION -->
 
   <div class="page-navigation">
 
     <button
-      class="arrow"
-      onclick="previousPage()"
+      class="nav-arrow"
+      id="previous"
+      type="button"
       aria-label="Önceki sayfa"
     >
       ←
     </button>
 
-
-    <div id="pageCounter">
-      Kapak / ...
+    <div
+      class="page-counter"
+      id="counter"
+    >
+      1 / 1
     </div>
 
-
     <button
-      class="arrow"
-      onclick="nextPage()"
+      class="nav-arrow"
+      id="next"
+      type="button"
       aria-label="Sonraki sayfa"
     >
       →
@@ -713,190 +555,247 @@
   </div>
 
 
-  <!-- =========================
-       PDF VIEWER
-  ========================= -->
-
-  <main
-    id="viewer"
-    class="spread"
-  ></main>
-
-
   <!-- PDF.JS -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
-
   <script>
-
-
-    /* =========================
-       PDF KONUMU
-    ========================= */
-
-    const params =
-      new URLSearchParams(
-        window.location.search
-      );
-
-
-    const pdfUrl =
-      params.get("pdf")
-      || "dergi/01-eylul.pdf";
-
 
     pdfjsLib.GlobalWorkerOptions.workerSrc =
       "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
 
+    /* ---------------------------------
+       PDF URL
+    --------------------------------- */
+
+    const params =
+      new URLSearchParams(window.location.search);
+
+    const pdfUrl =
+      params.get("pdf") || "dergi/02-ekim.pdf";
+
+
+    /* ---------------------------------
+       ISSUE NAME
+    --------------------------------- */
+
+    const issueName =
+      document.getElementById("issueName");
+
+
+    function getIssueName(pdfPath) {
+
+      const fileName =
+        pdfPath
+          .split("/")
+          .pop()
+          .replace(".pdf", "");
+
+      const issueMap = {
+
+        "01-eylul":
+          "01 EYLÜL",
+
+        "02-ekim":
+          "02 EKİM",
+
+        "03-kasim":
+          "03 KASIM",
+
+        "04-aralik":
+          "04 ARALIK",
+
+        "05-ocak":
+          "05 OCAK",
+
+        "06-subat":
+          "06 ŞUBAT",
+
+        "07-mart":
+          "07 MART",
+
+        "08-nisan":
+          "08 NİSAN",
+
+        "09-mayis":
+          "09 MAYIS",
+
+        "10-haziran":
+          "10 HAZİRAN",
+
+        "11-temmuz":
+          "11 TEMMUZ",
+
+        "12-agustos":
+          "12 AĞUSTOS"
+
+      };
+
+      return issueMap[fileName] || "DEJAVU";
+
+    }
+
+
+    issueName.textContent =
+      getIssueName(pdfUrl);
+
+
+    /* ---------------------------------
+       ELEMENTS
+    --------------------------------- */
+
+    const viewer =
+      document.getElementById("viewer");
+
+    const counter =
+      document.getElementById("counter");
+
+    const previous =
+      document.getElementById("previous");
+
+    const next =
+      document.getElementById("next");
+
+    const spreadButton =
+      document.getElementById("spreadButton");
+
+    const stripButton =
+      document.getElementById("stripButton");
+
+    const zoomInButton =
+      document.getElementById("zoomIn");
+
+    const zoomOutButton =
+      document.getElementById("zoomOut");
+
+    const fullscreenButton =
+      document.getElementById("fullscreen");
+
+
+    /* ---------------------------------
+       STATE
+    --------------------------------- */
+
     let pdf = null;
 
-    let currentPage = 1;
-
     let totalPages = 0;
+
+    let currentPage = 1;
 
     let mode = "spread";
 
     let zoom = 1;
 
 
-    const viewer =
-      document.getElementById("viewer");
-
-
-    const counter =
-      document.getElementById("pageCounter");
-
-
-    /* =========================
-       PDF YÜKLE
-    ========================= */
+    /* ---------------------------------
+       LOAD PDF
+    --------------------------------- */
 
     async function loadPDF() {
 
       try {
 
-        pdf =
-          await pdfjsLib.getDocument(
-            pdfUrl
-          ).promise;
+        const loadingTask =
+          pdfjsLib.getDocument(pdfUrl);
 
+        pdf =
+          await loadingTask.promise;
 
         totalPages =
           pdf.numPages;
 
+        viewer.innerHTML = "";
 
         await renderAllPages();
-
 
         updateVisiblePages();
 
         updateCounter();
 
-
-        document
-          .getElementById("loading")
-          .style.opacity = "0";
-
-
-        setTimeout(() => {
-
-          document
-            .getElementById("loading")
-            .style.display = "none";
-
-        }, 400);
-
-
       }
 
-      catch(error) {
+      catch (error) {
 
         console.error(error);
 
+        viewer.innerHTML = `
 
-        document
-          .getElementById("loading")
-          .innerHTML = `
+          <div class="error">
 
-            <div style="
-              text-align:center;
-              padding:30px;
-            ">
+            <h2>
+              Dergi yüklenemedi.
+            </h2>
 
-              <div style="
-                font-family:'Cormorant Garamond';
-                font-size:40px;
-                margin-bottom:15px;
-              ">
-                Bir sorun oluştu.
-              </div>
+            <p>
+              PDF dosyası bulunamadı veya yüklenemedi.
+              <br><br>
+              Kontrol edilmesi gereken dosya:
+              <br>
+              <strong>${pdfUrl}</strong>
+            </p>
 
-              <div style="
-                font-size:13px;
-                color:#765d67;
-              ">
-                Dergi dosyası bulunamadı.
-                <br><br>
-                PDF dosyasının
-                <b>dergi/01-eylul.pdf</b>
-                konumunda olduğundan emin ol.
-              </div>
+          </div>
 
-            </div>
-
-          `;
+        `;
 
       }
 
     }
 
 
-    /* =========================
-       TÜM SAYFALARI OLUŞTUR
-    ========================= */
+    /* ---------------------------------
+       RENDER ALL
+    --------------------------------- */
 
     async function renderAllPages() {
 
-      viewer.innerHTML = "";
+      const fragment =
+        document.createDocumentFragment();
 
 
       for (
-        let i = 1;
-        i <= totalPages;
-        i++
+        let pageNumber = 1;
+        pageNumber <= totalPages;
+        pageNumber++
       ) {
 
-        const pageBox =
+        const pageElement =
           document.createElement("div");
 
+        pageElement.className = "page";
 
-        pageBox.className =
-          "page";
-
-
-        pageBox.dataset.page =
-          i;
+        pageElement.dataset.page =
+          pageNumber;
 
 
         const canvas =
           document.createElement("canvas");
 
+        pageElement.appendChild(canvas);
 
-        /*
-          BURADA EKSTRA SAYFA
-          NUMARASI YOK.
-        */
+        fragment.appendChild(pageElement);
 
-        pageBox.appendChild(canvas);
+      }
 
-        viewer.appendChild(pageBox);
 
+      viewer.appendChild(fragment);
+
+
+      const pages =
+        [...viewer.querySelectorAll(".page")];
+
+
+      for (
+        const pageElement of pages
+      ) {
+
+        const pageNumber =
+          Number(pageElement.dataset.page);
 
         await renderPage(
-          i,
-          canvas
+          pageNumber,
+          pageElement
         );
 
       }
@@ -904,56 +803,66 @@
     }
 
 
-    /* =========================
-       TEK SAYFA RENDER
-       ESKİ KALİTE
-    ========================= */
+    /* ---------------------------------
+       RENDER PAGE
+    --------------------------------- */
 
     async function renderPage(
       pageNumber,
-      canvas
+      pageElement
     ) {
 
       const page =
-        await pdf.getPage(
-          pageNumber
-        );
+        await pdf.getPage(pageNumber);
+
+      const canvas =
+        pageElement.querySelector("canvas");
+
+      const context =
+        canvas.getContext("2d");
 
 
-      const baseViewport =
-        page.getViewport({
-          scale: 1
-        });
+      let baseScale;
 
 
-      const maxWidth =
-        Math.min(
-          window.innerWidth * .9,
-          850
-        );
+      if (mode === "spread") {
 
+        if (window.innerWidth <= 700) {
 
-      let scale =
-        maxWidth /
-        baseViewport.width;
+          baseScale =
+            (window.innerWidth - 35) /
+            page.getViewport({ scale: 1 }).width;
 
+        }
 
-      if (
-        window.innerWidth > 700 &&
-        mode === "spread"
-      ) {
+        else {
 
-        scale =
+          baseScale =
+            Math.min(
+              (window.innerWidth - 100) /
+                2 /
+                page.getViewport({ scale: 1 }).width,
+              1.5
+            );
+
+        }
+
+      }
+
+      else {
+
+        baseScale =
           Math.min(
-            (window.innerWidth * .44) /
-            baseViewport.width,
-            1.5
+            (window.innerWidth - 50) /
+              page.getViewport({ scale: 1 }).width,
+            1.7
           );
 
       }
 
 
-      scale *= zoom;
+      const scale =
+        baseScale * zoom;
 
 
       const viewport =
@@ -969,21 +878,15 @@
       canvas.width =
         viewport.width * ratio;
 
-
       canvas.height =
         viewport.height * ratio;
 
 
       canvas.style.width =
-        viewport.width + "px";
-
+        `${viewport.width}px`;
 
       canvas.style.height =
-        viewport.height + "px";
-
-
-      const context =
-        canvas.getContext("2d");
+        `${viewport.height}px`;
 
 
       context.setTransform(
@@ -998,360 +901,173 @@
 
       await page.render({
 
-        canvasContext:
-          context,
+        canvasContext: context,
 
-        viewport:
-          viewport
+        viewport
 
       }).promise;
 
     }
 
 
-    /* =========================
-       GÖRÜNEN SAYFALAR
-    ========================= */
+    /* ---------------------------------
+       VISIBLE PAGES
+    --------------------------------- */
 
     function updateVisiblePages() {
 
       const pages =
-        document.querySelectorAll(
-          ".page"
-        );
+        [...viewer.querySelectorAll(".page")];
 
 
-      /*
-        ÖNCE HEPSİNİ GİZLE
-      */
+      if (mode === "strip") {
+
+        pages.forEach(page => {
+
+          page.classList.add("visible");
+
+          page.style.display = "";
+
+        });
+
+        return;
+
+      }
+
 
       pages.forEach(page => {
 
-        page.classList.remove(
-          "visible"
-        );
+        page.classList.remove("visible");
 
-        page.style.display =
-          "none";
+        page.style.display = "none";
 
       });
 
 
-      /*
-        ŞERİT MODU
-
-        BURADA HİÇBİR SAYFAYI
-        GİZLEMİYORUZ.
-      */
-
-      if (mode === "strip") {
-
-        viewer.classList.remove(
-          "cover"
-        );
-
-
-        pages.forEach(page => {
-
-          page.classList.add(
-            "visible"
-          );
-
-          page.style.display =
-            "block";
-
-        });
-
-
-        return;
-
-      }
-
-
-      /*
-        KAPAK
-    */
-
-      if (currentPage === 1) {
-
-        viewer.classList.add(
-          "cover"
-        );
-
-
-        const cover =
-          document.querySelector(
-            '[data-page="1"]'
-          );
-
-
-        if (cover) {
-
-          cover.classList.add(
-            "visible"
-          );
-
-          cover.style.display =
-            "block";
-
-        }
-
-
-        return;
-
-      }
-
-
-      /*
-        İÇ SAYFALAR
-
-        2 | 3
-        4 | 5
-        6 | 7
-        ...
-      */
-
-      viewer.classList.remove(
-        "cover"
-      );
+      const firstPage =
+        currentPage % 2 === 0
+          ? currentPage
+          : currentPage;
 
 
       const first =
-        document.querySelector(
-          `[data-page="${currentPage}"]`
-        );
+        pages[firstPage - 1];
 
 
       const second =
-        document.querySelector(
-          `[data-page="${currentPage + 1}"]`
-        );
+        pages[firstPage];
 
 
       if (first) {
 
-        first.classList.add(
-          "visible"
-        );
+        first.classList.add("visible");
 
-        first.style.display =
-          "block";
+        first.style.display = "";
 
       }
 
 
       if (second) {
 
-        second.classList.add(
-          "visible"
-        );
+        second.classList.add("visible");
 
-        second.style.display =
-          "block";
+        second.style.display = "";
 
       }
 
     }
 
 
-    /* =========================
-       ÖNCEKİ SAYFA
-    ========================= */
-
-    function previousPage() {
-
-      if (mode === "strip") {
-
-        if (currentPage > 1) {
-
-          currentPage--;
-
-        }
-
-        updateCounter();
-
-        scrollToPage(
-          currentPage
-        );
-
-        return;
-
-      }
-
-
-      if (currentPage <= 1) {
-
-        return;
-
-      }
-
-
-      if (currentPage === 2) {
-
-        currentPage = 1;
-
-      }
-
-      else {
-
-        currentPage -= 2;
-
-      }
-
-
-      updateVisiblePages();
-
-      updateCounter();
-
-    }
-
-
-    /* =========================
-       SONRAKİ SAYFA
-    ========================= */
-
-    function nextPage() {
-
-      if (mode === "strip") {
-
-        if (
-          currentPage < totalPages
-        ) {
-
-          currentPage++;
-
-        }
-
-        updateCounter();
-
-        scrollToPage(
-          currentPage
-        );
-
-        return;
-
-      }
-
-
-      if (
-        currentPage >= totalPages
-      ) {
-
-        return;
-
-      }
-
-
-      /*
-        KAPAK → 2|3
-      */
-
-      if (currentPage === 1) {
-
-        currentPage = 2;
-
-      }
-
-      /*
-        2|3 → 4|5
-        4|5 → 6|7
-      */
-
-      else {
-
-        currentPage += 2;
-
-      }
-
-
-      if (
-        currentPage > totalPages
-      ) {
-
-        currentPage =
-          totalPages;
-
-      }
-
-
-      updateVisiblePages();
-
-      updateCounter();
-
-    }
-
-
-    /* =========================
+    /* ---------------------------------
        COUNTER
-    ========================= */
+    --------------------------------- */
 
     function updateCounter() {
 
-      if (!totalPages) {
-
-        counter.textContent =
-          "Kapak / ...";
-
-        return;
-
-      }
-
-
-      if (mode === "strip") {
-
-        counter.textContent =
-          `${currentPage} / ${totalPages}`;
-
-        return;
-
-      }
-
-
-      if (currentPage === 1) {
-
-        counter.textContent =
-          `Kapak / ${totalPages}`;
-
-        return;
-
-      }
-
-
-      const second =
-        Math.min(
-          currentPage + 1,
-          totalPages
-        );
-
+      if (!totalPages) return;
 
       counter.textContent =
-        `${currentPage}–${second} / ${totalPages}`;
+        `${currentPage} / ${totalPages}`;
 
     }
 
 
-    /* =========================
-       ŞERİTTE SAYFAYA GİT
-    ========================= */
+    /* ---------------------------------
+       PREVIOUS
+    --------------------------------- */
 
-    function scrollToPage(
-      pageNumber
-    ) {
+    function previousPage() {
+
+      if (currentPage <= 1) return;
+
+      currentPage -=
+        mode === "spread" ? 2 : 1;
+
+      if (currentPage < 1) {
+        currentPage = 1;
+      }
+
+      updateVisiblePages();
+
+      updateCounter();
+
+      scrollToPage(currentPage);
+
+    }
+
+
+    /* ---------------------------------
+       NEXT
+    --------------------------------- */
+
+    function nextPage() {
+
+      if (currentPage >= totalPages) return;
+
+      currentPage +=
+        mode === "spread" ? 2 : 1;
+
+      if (currentPage > totalPages) {
+        currentPage = totalPages;
+      }
+
+      updateVisiblePages();
+
+      updateCounter();
+
+      scrollToPage(currentPage);
+
+    }
+
+
+    /* ---------------------------------
+       SCROLL TO PAGE
+    --------------------------------- */
+
+    function scrollToPage(pageNumber) {
 
       const page =
-        document.querySelector(
-          `[data-page="${pageNumber}"]`
+        viewer.querySelector(
+          `.page[data-page="${pageNumber}"]`
         );
 
+      if (!page) return;
 
-      if (page) {
+
+      if (mode === "strip") {
 
         page.scrollIntoView({
-
           behavior: "smooth",
-
           block: "center"
+        });
 
+      }
+
+      else {
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
         });
 
       }
@@ -1359,133 +1075,108 @@
     }
 
 
-    /* =========================
-       MOD DEĞİŞTİR
-    ========================= */
+    /* ---------------------------------
+       MODE
+    --------------------------------- */
 
-    function setMode(newMode) {
+    async function setMode(newMode) {
 
       mode =
         newMode;
 
-
       viewer.className =
-        newMode;
+        mode;
 
 
-      document
-        .getElementById("spreadButton")
-        .classList
-        .toggle(
-          "active",
-          newMode === "spread"
-        );
+      spreadButton.classList.toggle(
+        "active",
+        mode === "spread"
+      );
 
 
-      document
-        .getElementById("stripButton")
-        .classList
-        .toggle(
-          "active",
-          newMode === "strip"
-        );
+      stripButton.classList.toggle(
+        "active",
+        mode === "strip"
+      );
 
+
+      await rerender();
 
       updateVisiblePages();
 
       updateCounter();
 
-      rerender();
-
     }
 
 
-    /* =========================
-       ZOOM IN
-    ========================= */
-
-    function zoomIn() {
-
-      zoom =
-        Math.min(
-          zoom + .1,
-          1.6
-        );
-
-
-      rerender();
-
-    }
-
-
-    /* =========================
-       ZOOM OUT
-    ========================= */
-
-    function zoomOut() {
-
-      zoom =
-        Math.max(
-          zoom - .1,
-          .7
-        );
-
-
-      rerender();
-
-    }
-
-
-    /* =========================
-       YENİDEN RENDER
-    ========================= */
+    /* ---------------------------------
+       ZOOM
+    --------------------------------- */
 
     async function rerender() {
 
-      if (!pdf) {
-
-        return;
-
-      }
-
-
-      const canvases =
-        document.querySelectorAll(
-          ".page canvas"
-        );
+      const pages =
+        [...viewer.querySelectorAll(".page")];
 
 
       for (
-        let i = 0;
-        i < canvases.length;
-        i++
+        const pageElement of pages
       ) {
 
+        const pageNumber =
+          Number(pageElement.dataset.page);
+
         await renderPage(
-          i + 1,
-          canvases[i]
+          pageNumber,
+          pageElement
         );
 
       }
 
+    }
+
+
+    async function zoomIn() {
+
+      zoom =
+        Math.min(
+          zoom + 0.15,
+          2.5
+        );
+
+      await rerender();
 
       updateVisiblePages();
 
     }
 
 
-    /* =========================
-       TAM EKRAN
-    ========================= */
+    async function zoomOut() {
+
+      zoom =
+        Math.max(
+          zoom - 0.15,
+          0.5
+        );
+
+      await rerender();
+
+      updateVisiblePages();
+
+    }
+
+
+    /* ---------------------------------
+       FULLSCREEN
+    --------------------------------- */
 
     function fullScreen() {
 
-      if (
-        !document.fullscreenElement
-      ) {
+      if (!document.fullscreenElement) {
 
         document.documentElement
-          .requestFullscreen();
+          .requestFullscreen()
+          .catch(() => {});
 
       }
 
@@ -1498,57 +1189,112 @@
     }
 
 
-    /* =========================
-       KLAVYE
-    ========================= */
+    /* ---------------------------------
+       EVENTS
+    --------------------------------- */
+
+    previous.addEventListener(
+      "click",
+      previousPage
+    );
+
+
+    next.addEventListener(
+      "click",
+      nextPage
+    );
+
+
+    spreadButton.addEventListener(
+      "click",
+      () => setMode("spread")
+    );
+
+
+    stripButton.addEventListener(
+      "click",
+      () => setMode("strip")
+    );
+
+
+    zoomInButton.addEventListener(
+      "click",
+      zoomIn
+    );
+
+
+    zoomOutButton.addEventListener(
+      "click",
+      zoomOut
+    );
+
+
+    fullscreenButton.addEventListener(
+      "click",
+      fullScreen
+    );
+
+
+    /* ---------------------------------
+       KEYBOARD
+    --------------------------------- */
 
     document.addEventListener(
       "keydown",
       event => {
 
-        if (
-          event.key === "ArrowLeft"
-        ) {
-
+        if (event.key === "ArrowLeft") {
           previousPage();
-
         }
 
-
-        if (
-          event.key === "ArrowRight"
-        ) {
-
+        if (event.key === "ArrowRight") {
           nextPage();
+        }
 
+        if (event.key === "+") {
+          zoomIn();
+        }
+
+        if (event.key === "-") {
+          zoomOut();
         }
 
       }
     );
 
 
-    /* =========================
-       EKRAN BOYUTU
-    ========================= */
+    /* ---------------------------------
+       RESIZE
+    --------------------------------- */
+
+    let resizeTimer;
 
     window.addEventListener(
       "resize",
       () => {
 
-        rerender();
+        clearTimeout(resizeTimer);
+
+        resizeTimer =
+          setTimeout(async () => {
+
+            await rerender();
+
+            updateVisiblePages();
+
+          }, 250);
 
       }
     );
 
 
-    /* =========================
-       BAŞLAT
-    ========================= */
+    /* ---------------------------------
+       START
+    --------------------------------- */
 
     loadPDF();
 
   </script>
 
 </body>
-
 </html>
