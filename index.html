@@ -4,15 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>DEJAVU — 02 Ekim</title>
-  <meta name="description" content="DEJAVU. Ekim sayımızla buradayız.">
+  <title>DEJAVU — 03 Kasım</title>
+  <meta name="description" content="DEJAVU. Kasım sayımızla buradayız.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- BREVO -->
   <style>
     @font-face {
       font-display: block;
@@ -20,7 +18,6 @@
       src: url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/7529907e9eaf8ebb5220c5f9850e3811.woff2) format("woff2"),
            url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/25c678feafdc175a70922a116c9be3e7.woff) format("woff");
     }
-
     @font-face {
       font-display: fallback;
       font-family: Roboto;
@@ -28,37 +25,15 @@
       src: url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/6e9caeeafb1f3491be3e32744bc30440.woff2) format("woff2"),
            url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/71501f0d8d5aa95960f6475d5487d4c2.woff) format("woff");
     }
-
-    :where(.sib-form-message-panel) {
-      display: none;
-    }
-
-    :where(.sib-form-message-panel .sib-notification__icon) {
-      width: 20px;
-      height: 20px;
-    }
-
-    #sib-container input:-ms-input-placeholder {
-      font-family: "DM Sans", sans-serif;
-      text-align: left;
-      color: #9c8d94;
-    }
-
+    :where(.sib-form-message-panel) { display: none; }
+    :where(.sib-form-message-panel .sib-notification__icon) { width: 20px; height: 20px; }
     #sib-container input::placeholder {
       font-family: "DM Sans", sans-serif;
       text-align: left;
       color: #9c8d94;
     }
+    #sib-container a { text-decoration: underline; color: #d96f88; }
 
-    #sib-container a {
-      text-decoration: underline;
-      color: #d96f88;
-    }
-  </style>
-
-  <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
-
-  <style>
     :root {
       --cream: #f8eee9;
       --cream-2: #fff8f5;
@@ -69,41 +44,20 @@
       --wine: #482634;
       --dark: #292329;
       --muted: #766b70;
-      --white: #ffffff;
       --border: rgba(72, 38, 52, 0.12);
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: "DM Sans", sans-serif;
       background: var(--cream-2);
       color: var(--dark);
       overflow-x: hidden;
     }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input {
-      font: inherit;
-    }
-
-    /* BACKGROUND BLOBS */
-
-    body::before,
-    body::after {
+    body::before, body::after {
       content: "";
       position: fixed;
       z-index: -2;
@@ -112,510 +66,230 @@
       opacity: .35;
       pointer-events: none;
     }
-
     body::before {
-      width: 420px;
-      height: 420px;
+      width: 420px; height: 420px;
       background: var(--pink);
-      top: -160px;
-      right: -100px;
+      top: -160px; right: -100px;
     }
-
     body::after {
-      width: 420px;
-      height: 420px;
+      width: 420px; height: 420px;
       background: var(--lavender);
-      bottom: -180px;
-      left: -120px;
+      bottom: -180px; left: -120px;
     }
-
-    /* NAVBAR */
 
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      width: 100%;
+      position: sticky; top: 0; z-index: 100; width: 100%;
       padding: 20px 6%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display: flex; justify-content: space-between; align-items: center;
       background: rgba(255, 248, 245, .82);
       backdrop-filter: blur(18px);
       border-bottom: 1px solid rgba(72, 38, 52, .08);
     }
-
-    .nav-logo {
+    .nav-logo, .footer-logo {
       font-family: "Cormorant Garamond", serif;
-      font-size: 30px;
-      font-weight: 700;
-      letter-spacing: .08em;
+      font-size: 30px; font-weight: 700; letter-spacing: .08em;
       color: var(--wine);
     }
-
     .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 30px;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: .12em;
+      display: flex; align-items: center; gap: 30px;
+      font-size: 12px; font-weight: 600; letter-spacing: .12em;
     }
-
-    .nav-links a {
-      transition: color .25s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--pink-strong);
-    }
-
+    .nav-links a { transition: color .25s ease; }
+    .nav-links a:hover { color: var(--pink-strong); }
     .menu-button {
-      display: none;
-      border: 0;
-      background: none;
-      font-size: 25px;
-      color: var(--wine);
-      cursor: pointer;
+      display: none; border: 0; background: none; font-size: 25px;
+      color: var(--wine); cursor: pointer;
     }
-
-    /* HERO */
 
     .hero {
-      min-height: 88vh;
-      padding: 90px 7% 80px;
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 70px;
-      align-items: center;
+      min-height: 88vh; padding: 90px 7% 80px;
+      display: grid; grid-template-columns: 1.05fr .95fr;
+      gap: 70px; align-items: center;
     }
-
-    .eyebrow {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .22em;
-      color: var(--pink-strong);
-      margin-bottom: 20px;
+    .eyebrow, .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: .22em;
+      color: var(--pink-strong); margin-bottom: 20px;
     }
-
     .hero h1 {
       font-family: "Cormorant Garamond", serif;
       font-size: clamp(65px, 9vw, 130px);
-      line-height: .82;
-      font-weight: 500;
-      color: var(--wine);
-      margin-bottom: 35px;
+      line-height: .82; font-weight: 500;
+      color: var(--wine); margin-bottom: 35px;
     }
-
-    .hero h1 span {
-      display: block;
-      color: var(--dark);
-    }
-
+    .hero h1 span { display: block; color: var(--dark); }
     .hero-text {
-      max-width: 530px;
-      font-size: 17px;
-      line-height: 1.8;
-      color: var(--muted);
-      margin-bottom: 35px;
+      max-width: 530px; font-size: 17px; line-height: 1.8;
+      color: var(--muted); margin-bottom: 35px;
     }
-
     .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 15px 27px;
-      border-radius: 999px;
-      background: var(--wine);
-      color: white;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .1em;
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 15px 27px; border-radius: 999px;
+      background: var(--wine); color: white;
+      font-size: 12px; font-weight: 700; letter-spacing: .1em;
       transition: transform .25s ease, background .25s ease;
     }
-
-    .button:hover {
-      transform: translateY(-2px);
-      background: var(--pink-strong);
-    }
-
-    .hero-cover {
-      display: flex;
-      justify-content: center;
-    }
-
+    .button:hover { transform: translateY(-2px); background: var(--pink-strong); }
+    .hero-cover { display: flex; justify-content: center; }
     .cover-frame {
-      width: min(100%, 450px);
-      padding: 12px;
+      width: min(100%, 450px); padding: 12px;
       background: rgba(255,255,255,.6);
       border: 1px solid rgba(72,38,52,.1);
       box-shadow: 0 25px 70px rgba(72,38,52,.14);
-      transform: rotate(2deg);
-      transition: transform .5s ease;
+      transform: rotate(2deg); transition: transform .5s ease;
     }
+    .cover-frame:hover { transform: rotate(0deg) translateY(-5px); }
+    .cover-frame img { display: block; width: 100%; height: auto; }
 
-    .cover-frame:hover {
-      transform: rotate(0deg) translateY(-5px);
-    }
-
-    .cover-frame img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    /* SECTIONS */
-
-    section {
-      padding: 110px 7%;
-    }
-
-    .section-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .2em;
-      color: var(--pink-strong);
-      margin-bottom: 20px;
-    }
-
+    section { padding: 110px 7%; }
+    .section-label { font-size: 10px; letter-spacing: .2em; margin-bottom: 20px; }
     .section-title {
       font-family: "Cormorant Garamond", serif;
       font-size: clamp(45px, 6vw, 75px);
-      line-height: .95;
-      font-weight: 500;
-      color: var(--wine);
+      line-height: .95; font-weight: 500; color: var(--wine);
     }
-
     .section-text {
-      max-width: 680px;
-      margin-top: 28px;
-      color: var(--muted);
-      line-height: 1.8;
-      font-size: 16px;
+      max-width: 680px; margin-top: 28px; color: var(--muted);
+      line-height: 1.8; font-size: 16px;
     }
-
-    /* WELCOME */
-
-    .welcome {
-      background: var(--cream);
-    }
-
-    .welcome-inner {
-      max-width: 900px;
-    }
-
-    /* ISSUE */
-
-    .issue-section {
-      background: var(--cream-2);
-    }
-
+    .welcome { background: var(--cream); }
+    .welcome-inner { max-width: 900px; }
+    .issue-section { background: var(--cream-2); }
     .issue-card {
-      margin-top: 55px;
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 50px;
-      align-items: center;
-      padding: 35px;
+      margin-top: 55px; display: grid;
+      grid-template-columns: 280px 1fr; gap: 50px;
+      align-items: center; padding: 35px;
       background: rgba(255,255,255,.65);
-      border: 1px solid var(--border);
-      border-radius: 28px;
+      border: 1px solid var(--border); border-radius: 28px;
       box-shadow: 0 20px 60px rgba(72,38,52,.06);
     }
-
     .issue-card img {
-      width: 100%;
-      display: block;
-      border-radius: 3px;
+      width: 100%; display: block; border-radius: 3px;
       box-shadow: 0 15px 35px rgba(72,38,52,.12);
     }
-
     .issue-number {
       font-family: "Cormorant Garamond", serif;
-      font-size: 70px;
-      line-height: .9;
-      color: var(--wine);
+      font-size: 70px; line-height: .9; color: var(--wine);
     }
-
     .issue-date {
-      margin-top: 10px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .15em;
-      color: var(--pink-strong);
+      margin-top: 10px; font-size: 12px; font-weight: 700;
+      letter-spacing: .15em; color: var(--pink-strong);
     }
-
     .issue-description {
-      margin: 25px 0;
-      max-width: 550px;
-      line-height: 1.8;
-      color: var(--muted);
+      margin: 25px 0; max-width: 550px;
+      line-height: 1.8; color: var(--muted);
     }
 
-    /* NEWSLETTER */
-
-    .newsletter {
-      background: var(--wine);
-      color: white;
-    }
-
-    .newsletter .section-label {
-      color: var(--pink);
-    }
-
-    .newsletter .section-title {
-      color: white;
-    }
-
+    .newsletter { background: var(--wine); color: white; }
+    .newsletter .section-label { color: var(--pink); }
+    .newsletter .section-title { color: white; }
     .newsletter-intro {
-      max-width: 600px;
-      margin-top: 20px;
-      color: rgba(255,255,255,.72);
-      line-height: 1.7;
+      max-width: 600px; margin-top: 20px;
+      color: rgba(255,255,255,.72); line-height: 1.7;
     }
-
-    .brevo-wrapper {
-      max-width: 680px;
-      margin-top: 45px;
-    }
-
-    /* Brevo'nun dış kutusunu DEJAVU'ya uyduruyoruz */
-
+    .brevo-wrapper { max-width: 680px; margin-top: 45px; }
     .brevo-wrapper .sib-form {
-      background: transparent !important;
-      text-align: left !important;
-      padding: 0 !important;
+      background: transparent !important; text-align: left !important; padding: 0 !important;
     }
-
-    .brevo-wrapper #sib-form-container {
-      width: 100%;
-    }
-
+    .brevo-wrapper #sib-form-container { width: 100%; }
     .brevo-wrapper #sib-container {
-      max-width: 100% !important;
-      width: 100%;
-      padding: 28px !important;
+      max-width: 100% !important; width: 100%; padding: 28px !important;
       background: rgba(255,255,255,.08) !important;
       border: 1px solid rgba(255,255,255,.16) !important;
-      border-radius: 20px !important;
-      direction: ltr;
+      border-radius: 20px !important; direction: ltr;
     }
-
-    .brevo-wrapper .sib-form-block {
-      padding: 7px 0 !important;
-    }
-
-    .brevo-wrapper .sib-form-block p {
-      margin: 0;
-    }
-
-    .brevo-wrapper .sib-input {
-      padding: 0 !important;
-    }
-
-    .brevo-wrapper .form__label-row {
-      display: block;
-    }
-
+    .brevo-wrapper .sib-form-block { padding: 7px 0 !important; }
+    .brevo-wrapper .sib-form-block p { margin: 0; }
+    .brevo-wrapper .sib-input { padding: 0 !important; }
+    .brevo-wrapper .form__label-row { display: block; }
     .brevo-wrapper .entry__label {
       color: rgba(255,255,255,.9) !important;
       font-family: "DM Sans", sans-serif !important;
-      font-size: 13px !important;
-      margin-bottom: 8px;
-      display: block;
+      font-size: 13px !important; margin-bottom: 8px; display: block;
     }
-
     .brevo-wrapper .entry__field {
-      width: 100%;
-      border: 0 !important;
-      background: transparent !important;
-      box-shadow: none !important;
+      width: 100%; border: 0 !important;
+      background: transparent !important; box-shadow: none !important;
     }
-
     .brevo-wrapper input[type="text"] {
-      width: 100% !important;
-      height: 52px !important;
-      padding: 0 17px !important;
+      width: 100% !important; height: 52px !important; padding: 0 17px !important;
       border-radius: 12px !important;
       border: 1px solid rgba(255,255,255,.22) !important;
       background: rgba(255,255,255,.96) !important;
       color: var(--dark) !important;
       font-family: "DM Sans", sans-serif !important;
-      font-size: 14px !important;
-      box-shadow: none !important;
+      font-size: 14px !important; box-shadow: none !important;
     }
-
     .brevo-wrapper input[type="text"]:focus {
-      outline: none !important;
-      border-color: var(--pink) !important;
+      outline: none !important; border-color: var(--pink) !important;
     }
-
     .brevo-wrapper .entry__specification {
       color: rgba(255,255,255,.55) !important;
-      font-family: "DM Sans", sans-serif !important;
-      font-size: 11px !important;
+      font-family: "DM Sans", sans-serif !important; font-size: 11px !important;
     }
-
     .brevo-wrapper .sib-form-block__button {
-      width: 100% !important;
-      min-height: 52px !important;
-      border-radius: 999px !important;
-      border: 0 !important;
-      background: var(--pink) !important;
-      color: var(--wine) !important;
-      font-family: "DM Sans", sans-serif !important;
-      font-size: 13px !important;
-      font-weight: 700 !important;
-      letter-spacing: .08em;
-      text-align: center !important;
-      cursor: pointer;
-      transition: .25s ease;
+      width: 100% !important; min-height: 52px !important;
+      border-radius: 999px !important; border: 0 !important;
+      background: var(--pink) !important; color: var(--wine) !important;
+      font-family: "DM Sans", sans-serif !important; font-size: 13px !important;
+      font-weight: 700 !important; letter-spacing: .08em;
+      text-align: center !important; cursor: pointer; transition: .25s ease;
     }
-
     .brevo-wrapper .sib-form-block__button:hover {
-      background: var(--coral) !important;
-      transform: translateY(-1px);
+      background: var(--coral) !important; transform: translateY(-1px);
     }
-
     .brevo-wrapper .sib-form-message-panel {
-      max-width: 100% !important;
-      border-radius: 12px !important;
-      margin-bottom: 15px;
-      padding: 15px !important;
+      max-width: 100% !important; border-radius: 12px !important;
+      margin-bottom: 15px; padding: 15px !important;
     }
-
-    /* CONTACT */
-
-    .contact {
-      background: var(--cream);
-    }
-
+    .contact { background: var(--cream); }
     .contact-mail {
-      display: inline-block;
-      margin-top: 35px;
+      display: inline-block; margin-top: 35px;
       font-family: "Cormorant Garamond", serif;
-      font-size: clamp(30px, 5vw, 55px);
-      color: var(--wine);
-      border-bottom: 1px solid var(--pink);
-      transition: color .25s ease;
+      font-size: clamp(30px, 5vw, 55px); color: var(--wine);
+      border-bottom: 1px solid var(--pink); transition: color .25s ease;
     }
-
-    .contact-mail:hover {
-      color: var(--pink-strong);
-    }
-
-    /* FOOTER */
-
+    .contact-mail:hover { color: var(--pink-strong); }
     footer {
-      padding: 35px 7%;
-      background: var(--cream);
+      padding: 35px 7%; background: var(--cream);
       border-top: 1px solid rgba(72,38,52,.08);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
+      display: flex; justify-content: space-between;
+      align-items: center; gap: 20px;
     }
-
-    .footer-logo {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 25px;
-      font-weight: 700;
-      letter-spacing: .08em;
-      color: var(--wine);
-    }
-
-    footer p {
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    /* MOBILE */
+    .footer-logo { font-size: 25px; }
+    footer p { font-size: 11px; color: var(--muted); }
 
     @media (max-width: 800px) {
-
-      nav {
-        padding: 17px 6%;
-      }
-
+      nav { padding: 17px 6%; }
       .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        padding: 25px 6%;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-        background: rgba(255,248,245,.97);
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        padding: 25px 6%; flex-direction: column; align-items: flex-start;
+        gap: 20px; background: rgba(255,248,245,.97);
         border-bottom: 1px solid var(--border);
       }
-
-      .nav-links.active {
-        display: flex;
-      }
-
-      .menu-button {
-        display: block;
-      }
-
+      .nav-links.active { display: flex; }
+      .menu-button { display: block; }
       .hero {
-        min-height: auto;
-        padding: 70px 6% 80px;
-        grid-template-columns: 1fr;
-        gap: 55px;
+        min-height: auto; padding: 70px 6% 80px;
+        grid-template-columns: 1fr; gap: 55px;
       }
-
-      .hero h1 {
-        font-size: clamp(62px, 19vw, 100px);
-      }
-
-      .hero-text {
-        font-size: 15px;
-      }
-
-      section {
-        padding: 80px 6%;
-      }
-
-      .issue-card {
-        grid-template-columns: 1fr;
-        gap: 35px;
-        padding: 25px;
-      }
-
-      .issue-card img {
-        max-width: 280px;
-        margin: auto;
-      }
-
-      .issue-number {
-        font-size: 58px;
-      }
-
-      .brevo-wrapper #sib-container {
-        padding: 20px !important;
-      }
-
-      footer {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+      .hero h1 { font-size: clamp(62px, 19vw, 100px); }
+      .hero-text { font-size: 15px; }
+      section { padding: 80px 6%; }
+      .issue-card { grid-template-columns: 1fr; gap: 35px; padding: 25px; }
+      .issue-card img { max-width: 280px; margin: auto; }
+      .issue-number { font-size: 58px; }
+      .brevo-wrapper #sib-container { padding: 20px !important; }
+      footer { flex-direction: column; align-items: flex-start; }
     }
   </style>
+
+  <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
 </head>
 
 <body>
-
-  <!-- NAVBAR -->
-
   <nav>
     <a href="index.html" class="nav-logo">DEJAVU</a>
-
-    <button class="menu-button" onclick="toggleMenu()" aria-label="Menüyü aç">
-      ☰
-    </button>
-
+    <button class="menu-button" onclick="toggleMenu()" aria-label="Menüyü aç">☰</button>
     <div class="nav-links" id="navLinks">
       <a href="index.html">ANA SAYFA</a>
       <a href="#dergi">DERGİ</a>
@@ -625,398 +299,155 @@
     </div>
   </nav>
 
-
-  <!-- HERO -->
-
   <main>
-
     <section class="hero">
-
       <div class="hero-content">
-
-        <div class="eyebrow">
-          DEJAVU · 02 EKİM
-        </div>
-
-        <h1>
-          Merhaba.
-          <span>Biz DEJAVU.</span>
-        </h1>
-
+        <div class="eyebrow">DEJAVU · 03 KASIM</div>
+        <h1>Merhaba.<span>Biz DEJAVU.</span></h1>
         <p class="hero-text">
-          İkinci sayımızla buradayız. Birlikte bakmak, okumak ve keşfetmek için
-          küçük bir alan.
+          Üçüncü sayımızla buradayız. Kasımın renklerini, hikâyelerini ve
+          küçük keşiflerini birlikte okumaya davetlisin.
         </p>
-
-        <a
-          class="button"
-          href="reader.html?pdf=dergi/02-ekim.pdf">
-          DERGİYİ OKU →
-        </a>
-
+        <a class="button" href="reader.html?pdf=dergi/03-kasim.pdf">DERGİYİ OKU →</a>
       </div>
-
 
       <div class="hero-cover">
-
         <div class="cover-frame">
-          <img
-            src="images/02-ekim-kapak.jpg"
-            alt="DEJAVU 02 Ekim 2026 kapak">
+          <img src="images/03-kasim-kapak.jpg" alt="DEJAVU 03 Kasım 2026 kapak">
         </div>
-
       </div>
-
     </section>
 
-
-    <!-- HAKKIMIZDA -->
-
     <section class="welcome" id="hakkimizda">
-
       <div class="welcome-inner">
-
-        <div class="section-label">
-          MERHABA
-        </div>
-
-        <h2 class="section-title">
-          Yeni bir sayı.<br>
-          Yeni bir merhaba.
-        </h2>
-
+        <div class="section-label">MERHABA</div>
+        <h2 class="section-title">Yeni bir sayı.<br>Yeni bir merhaba.</h2>
         <p class="section-text">
           DEJAVU; kadınların dünyasına, gündelik hayatın küçük detaylarına,
           modaya, kültüre, güzelliğe ve biraz da hayatın kendisine bakan
           dijital bir dergi.
         </p>
-
         <p class="section-text">
           Bazen bir kahve masasında konuşulanları, bazen sokakta gördüğümüz
           bir şeyi, bazen de uzun zamandır aklımızda olan bir soruyu sayfalara
           taşıyoruz.
         </p>
-
       </div>
-
     </section>
-
-
-    <!-- DERGİ -->
 
     <section class="issue-section" id="dergi">
-
-      <div class="section-label">
-        DEJAVU · SAYI 02
-      </div>
-
-      <h2 class="section-title">
-        Ekim sayısı.
-      </h2>
+      <div class="section-label">DEJAVU · SAYI 03</div>
+      <h2 class="section-title">Kasım sayısı.</h2>
 
       <div class="issue-card">
-
-        <img
-          src="images/02-ekim-kapak.jpg"
-          alt="DEJAVU 02 Ekim 2026">
-
+        <img src="images/03-kasim-kapak.jpg" alt="DEJAVU 03 Kasım 2026">
         <div>
-
-          <div class="issue-number">
-            02
-          </div>
-
-          <div class="issue-date">
-            EKİM 2026
-          </div>
-
+          <div class="issue-number">03</div>
+          <div class="issue-date">KASIM 2026</div>
           <p class="issue-description">
-            Yeni sayımız yayında. Modadan güzelliğe, şehir hayatından
-            kültüre uzanan Ekim sayısını keşfetmek için dergiyi aç.
+            Kasım sayımız yayında. Modadan güzelliğe, şehir hayatından
+            kültüre uzanan yeni sayımızı keşfetmek için dergiyi aç.
           </p>
-
-          <a
-            class="button"
-            href="reader.html?pdf=dergi/02-ekim.pdf">
-            OKUMAYA BAŞLA →
-          </a>
-
+          <a class="button" href="reader.html?pdf=dergi/03-kasim.pdf">OKUMAYA BAŞLA →</a>
         </div>
-
       </div>
-
     </section>
 
-
-    <!-- NEWSLETTER -->
-
     <section class="newsletter">
-
-      <div class="section-label">
-        POSTA KUTUNA DEJAVU
-      </div>
-
-      <h2 class="section-title">
-        Yeni sayıyı kaçırma.
-      </h2>
-
+      <div class="section-label">POSTA KUTUNA DEJAVU</div>
+      <h2 class="section-title">Yeni sayıyı kaçırma.</h2>
       <p class="newsletter-intro">
         Yeni sayımız yayımlandığında ilk senin haberin olsun.
         E-posta adresini bırak, DEJAVU posta kutuna gelsin.
       </p>
 
-
       <div class="brevo-wrapper">
-
-        <!-- BREVO FORM -->
-
         <div class="sib-form">
-
           <div id="sib-form-container">
-
-            <!-- HATA -->
-
-            <div
-              id="error-message"
-              class="sib-form-message-panel"
-              style="
-                font-family:DM Sans,sans-serif;
-                font-size:14px;
-                text-align:left;
-                color:#661d1d;
-                background-color:#ffeded;
-                border-color:#ff4949;
-                border-radius:12px;
-                max-width:100%;
-                padding:15px;
-              ">
-
+            <div id="error-message" class="sib-form-message-panel"
+              style="font-family:DM Sans,sans-serif;font-size:14px;text-align:left;color:#661d1d;background-color:#ffeded;border-color:#ff4949;border-radius:12px;max-width:100%;padding:15px;">
               <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
-
-                <span class="sib-form-message-panel__inner-text">
-                  İşlem sırasında sorun çıktı. Lütfen tekrar deneyiniz.
-                </span>
-
+                <span class="sib-form-message-panel__inner-text">İşlem sırasında sorun çıktı. Lütfen tekrar deneyiniz.</span>
               </div>
-
             </div>
 
-
-            <!-- BAŞARILI -->
-
-            <div
-              id="success-message"
-              class="sib-form-message-panel"
-              style="
-                font-family:DM Sans,sans-serif;
-                font-size:14px;
-                text-align:left;
-                color:#085229;
-                background-color:#e7faf0;
-                border-color:#13ce66;
-                border-radius:12px;
-                max-width:100%;
-                padding:15px;
-              ">
-
+            <div id="success-message" class="sib-form-message-panel"
+              style="font-family:DM Sans,sans-serif;font-size:14px;text-align:left;color:#085229;background-color:#e7faf0;border-color:#13ce66;border-radius:12px;max-width:100%;padding:15px;">
               <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
-
-                <span class="sib-form-message-panel__inner-text">
-                  Aboneliğiniz onaylanmıştır. DEJAVU artık posta kutunuzda.
-                </span>
-
+                <span class="sib-form-message-panel__inner-text">Aboneliğiniz onaylanmıştır. DEJAVU artık posta kutunuzda.</span>
               </div>
-
             </div>
-
-
-            <!-- FORM -->
 
             <div id="sib-container">
-
-              <form
-                id="sib-form"
-                method="POST"
+              <form id="sib-form" method="POST"
                 action="https://897125d3.sibforms.com/serve/MUIFABbf5kpQrpnkDMzF_RWA5YiwvUksjjqwlnwFtQGyF9J-o2Bt4urqmooL-2bnhGYcXt4U5Cgl-KH3RvVMXmz7fDFkVK7lvuFJQtSrcIxbOjMhTEhMrLTgThLMIpEgmb09F22F4N-7bgz8HC0GG-rD4vb6TqmTp1hxrMoI0-C3LuoIHQQGDgbJAv0WlfYXrGgK1RRiOvcZUrt_fw=="
-                data-type="subscription"
-              >
+                data-type="subscription">
 
                 <div class="sib-form-block">
-
-                  <div
-                    style="
-                      font-family:Cormorant Garamond,serif;
-                      font-size:32px;
-                      font-weight:600;
-                      color:#ffffff;
-                    ">
+                  <div style="font-family:Cormorant Garamond,serif;font-size:32px;font-weight:600;color:#ffffff;">
                     Aylık Hatırlatmanız
                   </div>
-
                 </div>
-
-
                 <div class="sib-form-block">
-
-                  <div
-                    style="
-                      font-family:DM Sans,sans-serif;
-                      font-size:14px;
-                      line-height:1.7;
-                      color:rgba(255,255,255,.72);
-                    ">
+                  <div style="font-family:DM Sans,sans-serif;font-size:14px;line-height:1.7;color:rgba(255,255,255,.72);">
                     Her ay dergimizi ilk okuyanlardan biri olun.
                   </div>
-
                 </div>
-
-
                 <div class="sib-input sib-form-block">
-
                   <div class="form__entry entry_block">
-
                     <div class="form__label-row">
-
-                      <label
-                        class="entry__label"
-                        for="EMAIL"
-                        data-required="*">
+                      <label class="entry__label" for="EMAIL" data-required="*">
                         Abone olmak için mail adresinizi giriniz.
                       </label>
-
                       <div class="entry__field">
-
-                        <input
-                          class="input"
-                          type="text"
-                          id="EMAIL"
-                          name="EMAIL"
-                          autocomplete="off"
-                          value=""
-                          placeholder="E-posta adresiniz"
-                          data-required="true"
-                          required
-                        />
-
+                        <input class="input" type="text" id="EMAIL" name="EMAIL"
+                          autocomplete="off" value="" placeholder="E-posta adresiniz"
+                          data-required="true" required>
                       </div>
-
                     </div>
-
-
                     <label class="entry__error entry__error--primary"></label>
-
-
-                    <label class="entry__specification">
-                      Örneğin: adiniz@mail.com
-                    </label>
-
+                    <label class="entry__specification">Örneğin: adiniz@mail.com</label>
                   </div>
-
                 </div>
-
-
                 <div class="sib-form-block">
-
-                  <button
-                    class="sib-form-block__button sib-form-block__button-with-loader"
-                    form="sib-form"
-                    type="submit">
-
-                    <svg
-                      class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon"
-                      viewBox="0 0 512 512">
-
-                      <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
-
+                  <button class="sib-form-block__button sib-form-block__button-with-loader"
+                    form="sib-form" type="submit">
+                    <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512">
+                      <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z"/>
                     </svg>
-
                     ABONE OL
-
                   </button>
-
                 </div>
-
-
-                <input
-                  type="text"
-                  name="email_address_check"
-                  value=""
-                  class="input--hidden"
-                >
-
-                <input
-                  type="hidden"
-                  name="locale"
-                  value="tr"
-                >
-
+                <input type="text" name="email_address_check" value="" class="input--hidden">
+                <input type="hidden" name="locale" value="tr">
               </form>
-
             </div>
-
           </div>
-
         </div>
-
       </div>
-
     </section>
 
-
-    <!-- İLETİŞİM -->
-
     <section class="contact" id="iletisim">
-
-      <div class="section-label">
-        İLETİŞİM
-      </div>
-
-      <h2 class="section-title">
-        Bize yaz.
-      </h2>
-
+      <div class="section-label">İLETİŞİM</div>
+      <h2 class="section-title">Bize yaz.</h2>
       <p class="section-text">
         Önerilerin, fikirlerin, iş birliklerin ya da sadece merhaba demek
         istediğin bir şey varsa bize ulaşabilirsin.
       </p>
-
-      <a
-        class="contact-mail"
-        href="mailto:dejavudergi@gmail.com">
-        dejavudergi@gmail.com
-      </a>
-
+      <a class="contact-mail" href="mailto:dejavudergi@gmail.com">dejavudergi@gmail.com</a>
     </section>
-
   </main>
 
-
-  <!-- FOOTER -->
-
   <footer>
-
-    <div class="footer-logo">
-      DEJAVU
-    </div>
-
-    <p>
-      © 2026 DEJAVU · Tüm hakları saklıdır.
-    </p>
-
-    <p>
-      İstanbul
-    </p>
-
+    <div class="footer-logo">DEJAVU</div>
+    <p>© 2026 DEJAVU · Tüm hakları saklıdır.</p>
+    <p>İstanbul</p>
   </footer>
-
-
-  <!-- MENU SCRIPT -->
 
   <script>
     function toggleMenu() {
       document.getElementById("navLinks").classList.toggle("active");
     }
-
     document.querySelectorAll(".nav-links a").forEach(function(link) {
       link.addEventListener("click", function() {
         document.getElementById("navLinks").classList.remove("active");
@@ -1024,34 +455,16 @@
     });
   </script>
 
-
-  <!-- BREVO SCRIPT -->
-
   <script>
     window.REQUIRED_CODE_ERROR_MESSAGE = 'Lütfen ülke kodunu seçiniz.';
     window.LOCALE = 'tr';
-
-    window.EMAIL_INVALID_MESSAGE =
-      "Girdiğiniz e-posta adresi geçerli görünmüyor.";
-
-    window.SMS_INVALID_MESSAGE =
-      "Girdiğiniz bilgi geçerli görünmüyor.";
-
-    window.REQUIRED_ERROR_MESSAGE =
-      "Bu alan boş bırakılamaz.";
-
-    window.GENERIC_INVALID_MESSAGE =
-      "Girdiğiniz bilgi geçerli görünmüyor.";
-
-    window.INVALID_NUMBER =
-      "Girdiğiniz numara geçerli görünmüyor.";
-
-    window.INVALID_DATE =
-      "Lütfen geçerli bir tarih giriniz.";
-
-    window.REQUIRED_MULTISELECT_MESSAGE =
-      "Lütfen en az bir seçenek seçiniz.";
-
+    window.EMAIL_INVALID_MESSAGE = "Girdiğiniz e-posta adresi geçerli görünmüyor.";
+    window.SMS_INVALID_MESSAGE = "Girdiğiniz bilgi geçerli görünmüyor.";
+    window.REQUIRED_ERROR_MESSAGE = "Bu alan boş bırakılamaz.";
+    window.GENERIC_INVALID_MESSAGE = "Girdiğiniz bilgi geçerli görünmüyor.";
+    window.INVALID_NUMBER = "Girdiğiniz numara geçerli görünmüyor.";
+    window.INVALID_DATE = "Lütfen geçerli bir tarih giriniz.";
+    window.REQUIRED_MULTISELECT_MESSAGE = "Lütfen en az bir seçenek seçiniz.";
     window.translation = {
       common: {
         selectedList: '{quantity} liste seçildi',
@@ -1060,14 +473,8 @@
         selectedOptions: '{quantity} seçildi'
       }
     };
-
     var AUTOHIDE = Boolean(0);
   </script>
-
-  <script
-    defer
-    src="https://sibforms.com/forms/end-form/build/main.js">
-  </script>
-
+  <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
 </body>
 </html>
